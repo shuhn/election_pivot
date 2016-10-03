@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import itertools
 
 def parse_names(key_players):
@@ -63,3 +62,19 @@ def parse_names(key_players):
             output_counter[value] = 0
 
     return output_mods, output_parts, output_keyplayers, output_counter
+
+def file_grab(name = 'All'):
+    if name == 'D':
+        return {'1st Democratic Debate: October 10th, 2015' : 'data/D_10_13_15.txt','2nd Democratic Debate: January 17th, 2016' : 'data/D_1_17_16.txt','3rd Democratic Debate: April 4th, 2016': 'data/D_4_14_16.txt'}
+    elif name == 'R':
+        return {'1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt','2nd Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt','3rd Republican Debate: March 10th, 2016' : 'data/R_3_10_16.txt'}
+    elif name == 'G':
+        return {'1st General Election Debate: September 9th, 2016' : 'data/G_9_26_16.txt'}
+    else:
+        return {'1st Democratic Debate: October 10th, 2015' : 'data/D_10_13_15.txt',
+        '1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt',
+        '2nd Democratic Debate: January 17th, 2016' : 'data/D_1_17_16.txt',
+        '2nd Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt',
+        '3rd Democratic Debate: April 4th, 2016': 'data/D_4_14_16.txt',
+        '3rd Republican Debate: March 10th, 2016' : 'data/R_3_10_16.txt',
+        '1st General Election Debate: September 9th, 2016' : 'data/G_9_26_16.txt'}

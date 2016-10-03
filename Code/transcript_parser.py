@@ -1,4 +1,4 @@
-from name_dict import parse_names
+from name_dict import parse_names, file_grab
 import re
 import itertools
 import string
@@ -18,6 +18,7 @@ def setup_buckets(file_name):
         main_text = []
         for line in f:
             line = filter(lambda x: x in printable, line)
+            line = re.sub("\[.*\]$", '', line) #remove [word here] annotations, i.e. [applause]
             words = line.split()
             main_text.append(words)
             for word in words:
@@ -33,7 +34,6 @@ def parse_text(main_text, key_players_textdict, output_counter):
     - main_text (list of lists)
     - key_players_textdict (dict): values empty
     - output_counter (dict): values empty
-
     OUTPUT:
     - key_players_textdict (dict): values filled
     - output_counter (dict): values filled
@@ -50,25 +50,24 @@ def parse_text(main_text, key_players_textdict, output_counter):
             output_counter[word] += 1
     return key_players_textdict, output_counter
 
-if __name__ == '__main__':
-    d_files = ['D_10_13_15.txt', 'D_1_17_16.txt', 'D_4_14_16.txt']
-    r_files = ['R_2_6_16.txt', 'R_3_10_16.txt','R_8_6_15.txt']
-    g_files = ['G_9_26_16.txt']
-    all_files = {'1st Democratic Debate: October 10th, 2015' : 'D_10_13_15.txt', '2nd Democratic Debate: January 17th, 2016' : 'D_1_17_16.txt', '3rd Democratic Debate: April 4th, 2016': 'D_4_14_16.txt', '2nd Republican Debate: February 6th, 2016' : 'R_2_6_16.txt', '3rd Republican Debate: March 10th, 2016' : 'R_3_10_16.txt','1st Republican Debate: August 8th, 2015' : 'R_8_6_15.txt', '1st General Election Debate: September 9th, 2016' : 'G_9_26_16.txt'}
+def frequency(key_players_textdict, output_counter):
+    total_interventions_list = output_counter.values()
+    total_interventions_sum = 0
+    num_candidates = len(total_interventions_list)
+    for intervention in total_interventions_list:
+        total_interventions_sum += int(intervention)
 
+    sorted_x = sorted(output_counter.items(), key=operator.itemgetter(1), reverse = True)
+    print name
+    for tuple1 in sorted_x:
+        print tuple1[0], tuple1[1], round(float(tuple1[1]) / (total_interventions_sum), 2)
+    print ""
+
+if __name__ == '__main__':
+    all_files = file_grab("G")
     for name, file_name in all_files.iteritems():
         m_t, k_p = setup_buckets(file_name)
         mods, parts, key_players, output_counter = parse_names(k_p)
         key_players_textdict, output_counter = parse_text(m_t, key_players, output_counter)
-
-        total_interventions_list = output_counter.values()
-        total_interventions_sum = 0
-        num_candidates = len(total_interventions_list)
-        for intervention in total_interventions_list:
-            total_interventions_sum += int(intervention)
-
-        sorted_x = sorted(output_counter.items(), key=operator.itemgetter(1), reverse = True)
-        print name
-        for tuple1 in sorted_x:
-            print tuple1[0], tuple1[1], round(float(tuple1[1]) / (total_interventions_sum), 2)
-        print ""
+        #frequency(key_players_textdict, output_counter)
+        
