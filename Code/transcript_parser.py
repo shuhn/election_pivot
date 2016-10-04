@@ -2,12 +2,16 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from name_dict import parse_names, file_grab
 import re
+import numpy as np
 import itertools
 import string
 import operator
 from textblob import TextBlob
 from summa import summarizer
 import pandas as pd
+from scipy.spatial.distance import pdist, squareform
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, dendrogram
 
 def setup_buckets(file_name):
     """
@@ -74,7 +78,7 @@ def sentiment_analysis(key_players_textdict):
         textblob = TextBlob(string_words)
         print candidate, textblob.sentiment
 
-def summarize_speech(key_players_textdict, defaults = ['CLINTON:', 'TRUMP:']):
+def summarize_speech(key_players_textdict, defaults = ['CLINTON:']):
     # for candidate, list_words in key_players_textdict.iteritems():
     for candidate in defaults:
         list_words = key_players_textdict[candidate]
@@ -83,7 +87,7 @@ def summarize_speech(key_players_textdict, defaults = ['CLINTON:', 'TRUMP:']):
         print summarizer.summarize(string_words, words = 200)
         print "-----"
 
-def setup_agg_df(relevant_debates, defaults = ['CLINTON:', 'TRUMP:']):
+def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
     #aggregate dictionaries
     aggregate_dict = {}
     for d in relevant_debates:
@@ -111,7 +115,7 @@ def k_means(df_dict, chosen = 'C'):
         vectorizer = TfidfVectorizer(stop_words='english')
         X = vectorizer.fit_transform(df['CLINTON:'])
         features = vectorizer.get_feature_names()
-        kmeans = KMeans()
+        kmeans = KMeans(n_clusters=7)
         kmeans.fit(X)
 
         # 2. Print out the centroids.
@@ -129,15 +133,41 @@ def k_means(df_dict, chosen = 'C'):
         vectorizer = TfidfVectorizer(stop_words='english', max_features=200)
         X = vectorizer.fit_transform(df['CLINTON:'])
         features = vectorizer.get_feature_names()
-        kmeans = KMeans()
+        kmeans = KMeans(n_clusters=7)
         kmeans.fit(X)
         top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
         print "top features for each cluster with 200 max features:"
         for num, centroid in enumerate(top_centroids):
             print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
 
+def hierarch_clust(df_dict, chosen = 'C'):
+    for candidate in chosen:
+        df_small = df_dict[candidate]
+
+        df_small['top_5'] = map(lambda x: x[:5], df_small['CLINTON:'])
+        # first vectorize...
+        vectorizer = TfidfVectorizer(stop_words='english', max_features=10)
+        small_X = vectorizer.fit_transform(df_small['CLINTON:'])
+        small_features = vectorizer.get_feature_names()
+
+        # now get distances
+        distxy = squareform(pdist(small_X.todense(), metric='cosine'))
+        distxy = np.nan_to_num(distxy)
+
+        # 4. Pass this matrix into scipy's linkage function to compute our
+        # hierarchical clusters.
+        link = linkage(distxy, method='complete')
+
+        # 5. Using scipy's dendrogram function plot the linkages as
+        # a hierachical tree.
+        dendro = dendrogram(link, color_threshold=1.5, leaf_font_size=9,
+                    labels=df_small['top_5'].values)
+        # fix spacing to better view dendrogram and the labels
+        plt.subplots_adjust(top=.99, bottom=0.5, left=0.05, right=0.99)
+        plt.show()
+
 if __name__ == '__main__':
-    all_files = file_grab('G')
+    all_files = file_grab('D')
     relevant_debates = []
     for name, file_name in all_files.iteritems():
         m_t, k_p = setup_buckets(file_name)
@@ -158,4 +188,9 @@ if __name__ == '__main__':
 
     #TOPIC MODELING
     df_dict = setup_agg_df(relevant_debates)
+
+    #KMEANS
     k_means(df_dict)
+
+    #HIER_ARCH
+    # hierarch_clust(df_dict)
