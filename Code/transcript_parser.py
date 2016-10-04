@@ -1,3 +1,4 @@
+from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from name_dict import parse_names, file_grab
@@ -12,6 +13,7 @@ import pandas as pd
 from scipy.spatial.distance import pdist, squareform
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage, dendrogram
+from nltk.stem import WordNetLemmatizer
 
 def setup_buckets(file_name):
     """
@@ -20,7 +22,6 @@ def setup_buckets(file_name):
         - Main Text (list)
         - List of Potential "Key-Players", i.e. moderator or participant (list)
     """
-
     with open(file_name, 'r') as f:
         printable = set(string.printable)
         key_players = []
@@ -87,6 +88,16 @@ def summarize_speech(key_players_textdict, defaults = ['CLINTON:']):
         print summarizer.summarize(string_words, words = 200)
         print "-----"
 
+def lemmitize(text_string):
+    regex = re.compile('<.+?>|[^a-zA-Z]')
+    clean_txt = regex.sub(' ', text_string)
+    tokens = clean_txt.split()
+    lowercased = [t.lower() for t in tokens]
+    no_stopwords = [w for w in lowercased if not w in stopwords.words('english')]
+    wordnet_lemmatizer = WordNetLemmatizer()
+    lemmed = [wordnet_lemmatizer.lemmatize(w) for w in no_stopwords]
+    return [w for w in lemmed if w]
+
 def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
     #aggregate dictionaries
     aggregate_dict = {}
@@ -105,7 +116,10 @@ def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
         string_words = (' '.join(list_words))
         textblob = TextBlob(string_words)
         for sentence in textblob.sentences:
-            sentence_list.append(str(sentence))
+            sentence = str(sentence)
+            lem_sentence = lemmitize(sentence)
+            sent_string = ' '.join(lem_sentence)
+            sentence_list.append(sent_string)
         df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
     return df_dict
 
@@ -190,7 +204,7 @@ if __name__ == '__main__':
     df_dict = setup_agg_df(relevant_debates)
 
     #KMEANS
-    k_means(df_dict)
+    # k_means(df_dict)
 
     #HIER_ARCH
     # hierarch_clust(df_dict)
