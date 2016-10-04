@@ -1,3 +1,5 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
 from name_dict import parse_names, file_grab
 import re
 import itertools
@@ -5,6 +7,7 @@ import string
 import operator
 from textblob import TextBlob
 from summa import summarizer
+import pandas as pd
 
 def setup_buckets(file_name):
     """
@@ -80,30 +83,58 @@ def summarize_speech(key_players_textdict, defaults = ['CLINTON:', 'TRUMP:']):
         print summarizer.summarize(string_words, words = 200)
         print "-----"
 
-def topic_modeling(relevant_debates, defaults = ['CLINTON:', 'TRUMP:'])):
+def setup_agg_df(relevant_debates, defaults = ['CLINTON:', 'TRUMP:']):
     #aggregate dictionaries
     aggregate_dict = {}
     for d in relevant_debates:
-      for k, v in d.iteritems():
-        if aggregate_dict.has_key(k):
-          aggregate_dict[k] = aggregate_dict[k] + v
-        else:
-          aggregate_dict[k] = v
+        for k, v in d.iteritems():
+            if aggregate_dict.has_key(k):
+                aggregate_dict[k] = aggregate_dict[k] + v
+            else:
+                aggregate_dict[k] = v
 
     #setup df - column = candidate name, rows = sentences
-
-
+    df_dict = {}
     for candidate in defaults:
-        sentences = []
-        list_words = key_players_textdict[candidate]
+        sentence_list = []
+        list_words = aggregate_dict[candidate]
         string_words = (' '.join(list_words))
         textblob = TextBlob(string_words)
-        for sentence in textblob.sentence:
-            sentences.append(sentence)
-        df = DataFrame(sentences, columns = candidate)
+        for sentence in textblob.sentences:
+            sentence_list.append(str(sentence))
+        df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
+    return df_dict
 
+def k_means(df_dict, chosen = 'C'):
+    for candidate in chosen:
+        df = df_dict[candidate]
+        vectorizer = TfidfVectorizer(stop_words='english')
+        X = vectorizer.fit_transform(df['CLINTON:'])
+        features = vectorizer.get_feature_names()
+        kmeans = KMeans()
+        kmeans.fit(X)
 
+        # 2. Print out the centroids.
+        # print "cluster centers:"
+        # print kmeans.cluster_centers_
 
+        # 3. Find the top 10 features for each cluster.
+        top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
+        print "top features for each cluster:"
+        for num, centroid in enumerate(top_centroids):
+            print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
+
+        print "--------"
+        # 4. Limit the number of features and see if the words of the topics change.
+        vectorizer = TfidfVectorizer(stop_words='english', max_features=200)
+        X = vectorizer.fit_transform(df['CLINTON:'])
+        features = vectorizer.get_feature_names()
+        kmeans = KMeans()
+        kmeans.fit(X)
+        top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
+        print "top features for each cluster with 200 max features:"
+        for num, centroid in enumerate(top_centroids):
+            print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
 
 if __name__ == '__main__':
     all_files = file_grab('G')
@@ -126,3 +157,5 @@ if __name__ == '__main__':
         relevant_debates.append(key_players_textdict)
 
     #TOPIC MODELING
+    df_dict = setup_agg_df(relevant_debates)
+    k_means(df_dict)
