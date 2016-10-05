@@ -97,7 +97,7 @@ def lemmitize(text_string):
     tokens = clean_txt.split()
     lowercased = [t.lower() for t in tokens]
     STOPWORDS = stopwords.words('english')
-    new_stop = ['unidentified', 'male', 'applause']
+    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing']
     for word in new_stop:
         STOPWORDS.append(word)
     no_stopwords = [w for w in lowercased if not w in STOPWORDS]
@@ -126,11 +126,10 @@ def setup_agg_df_lem(relevant_debates, defaults = ['CLINTON:']):
             sentence = str(speech)
             lem_sentence = lemmitize(sentence)
             sent_string = ' '.join(lem_sentence)
-            if len(sent_string.split(" ")) < 5:
-                continue
-            sentence_list.append(sent_string)
+            if len(sent_string.split(" ")) > 7:
+                sentence_list.append(sent_string)
         df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
-    return df_dict_lem
+    return df_dict
 
 def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
     #aggregate dictionaries
@@ -151,20 +150,20 @@ def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
         speeches = string_words.split("STOP")
         for speech in speeches:
             sentence = str(speech)
-            if len(sent_string.split(" ")) < 5:
-                continue
-            sentence_list.append(sent_string)
+            if len(sentence.split(" ")) > 7:
+                sentence_list.append(sentence)
         df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
     return df_dict
 
-def k_means(df_dict, chosen = 'C'):
+def k_means(df_dict, df_dict_nolem, chosen = 'C'):
     for candidate in chosen:
         df = df_dict[candidate]
+        df_nolem = df_dict_nolem[candidate]
 
-        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
+        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
         X = vectorizer.fit_transform(df['CLINTON:'])
         features = vectorizer.get_feature_names()
-        kmeans = KMeans(n_clusters=7)
+        kmeans = KMeans(n_clusters=6)
         kmeans.fit(X)
 
         #LOOK INTO CLASS BALANCES
@@ -199,9 +198,9 @@ def k_means(df_dict, chosen = 'C'):
             cluster = np.arange(0, X.shape[0])[assigned_cluster==i]
             sample_articles = np.random.choice(cluster, 3, replace=False)
             print "cluster %d:" % i
-            pd.set_option('display.max_colwidth', 200)
+            pd.set_option('display.max_colwidth', 400)
             for article in sample_articles:
-                print "    %s" % df.ix[article]
+                print "    %s" % df_nolem.ix[article]
             print "\n"
         pd.reset_option('display.max_colwidth')
 
@@ -209,9 +208,8 @@ def hierarch_clust(df_dict, chosen = 'C'):
     for candidate in chosen:
         df_small = df_dict[candidate]
 
-        # df_small['top_5'] = map(lambda x: x[:5], df_small['TRUMP:'])
         # first vectorize...
-        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
+        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
         small_X = vectorizer.fit_transform(df_small['CLINTON:'])
         small_features = vectorizer.get_feature_names()
 
@@ -252,10 +250,12 @@ if __name__ == '__main__':
         relevant_debates.append(key_players_textdict)
 
     #TOPIC MODELING
-    df_dict = setup_agg_df(relevant_debates)
+    df_dict_nolem = setup_agg_df(relevant_debates)
+    df_dict = setup_agg_df_lem(relevant_debates)
 
+    # print df_dict_nolem['C']
     #KMEANS
-    k_means(df_dict)
+    k_means(df_dict, df_dict_nolem)
 
     #HIER_ARCH
     # hierarch_clust(df_dict)

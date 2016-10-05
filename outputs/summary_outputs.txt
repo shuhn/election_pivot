@@ -54,3 +54,24 @@ They've looked at my plans and they've said, OK, if we can do this, and I intend
 And I think it's important to look at what we need to do to get the economy going again.
 Or maybe he doesn't want the American people, all of you watching tonight, to know that he's paid nothing in federal taxes, because the only years that anybody's ever seen were a couple of years when he had to turn them over to state authorities when he was trying to get a casino license, and they showed he didn't pay any federal income tax.
 But I want toon behalf of myself, and I think on behalf of a majority of the American people, say that, you know, our word is good.
+
+
+
+
+
+**Clustering**
+
+CLINTON PRIMARIES:: 6 TOPICS
+1) Judgement / Record
+2) Health Care
+3) National Security
+4) Social Security
+5) Education
+6) Financial Regulation
+
+0: people, think, america, good, gun, need, country, new, running, work
+1: health, care, health care, cost, health insurance, care act, affordable care, insurance, affordable, act
+2: got, think, syria, try, state, position, president, united, trying, weapon
+3: social security, social, security, support, going, trust fund, trust, security trust, fund, extend social
+4: american, want, everybody, going, tax, debt, standard, people, college, right
+5: president, obama, frank, president obama, dodd frank, dodd, senator, street, problem, senator sander
