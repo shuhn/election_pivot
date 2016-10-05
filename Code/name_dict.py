@@ -70,6 +70,8 @@ def file_grab(name = 'All'):
         return {'1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt','2nd Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt','3rd Republican Debate: March 10th, 2016' : 'data/R_3_10_16.txt'}
     elif name == 'G':
         return {'1st General Election Debate: September 9th, 2016' : 'data/G_9_26_16.txt'}
+    elif name == 'R1':
+        return {'1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt'}
     else:
         return {'1st Democratic Debate: October 10th, 2015' : 'data/D_10_13_15.txt',
         '1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt',

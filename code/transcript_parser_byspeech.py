@@ -14,6 +14,7 @@ from scipy.spatial.distance import pdist, squareform
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage, dendrogram
 from nltk.stem import WordNetLemmatizer
+from collections import Counter
 
 def setup_buckets(file_name):
     """
@@ -50,8 +51,10 @@ def parse_text(main_text, key_players_textdict, output_counter):
     """
 
     merged_text = list(itertools.chain(*main_text))
+    flag = merged_text[0]
     for word in merged_text:
         if word in key_players_textdict.iterkeys():
+            key_players_textdict[flag].append("STOP")
             flag = word
         else:
             key_players_textdict[flag].append(word)
@@ -79,7 +82,7 @@ def sentiment_analysis(key_players_textdict):
         textblob = TextBlob(string_words)
         print candidate, textblob.sentiment
 
-def summarize_speech(key_players_textdict, defaults = ['CLINTON:']):
+def summarize_speech(key_players_textdict, defaults = ['TRUMP:']):
     # for candidate, list_words in key_players_textdict.iteritems():
     for candidate in defaults:
         list_words = key_players_textdict[candidate]
@@ -93,12 +96,16 @@ def lemmitize(text_string):
     clean_txt = regex.sub(' ', text_string)
     tokens = clean_txt.split()
     lowercased = [t.lower() for t in tokens]
-    no_stopwords = [w for w in lowercased if not w in stopwords.words('english')]
+    STOPWORDS = stopwords.words('english')
+    new_stop = ['unidentified', 'male', 'applause']
+    for word in new_stop:
+        STOPWORDS.append(word)
+    no_stopwords = [w for w in lowercased if not w in STOPWORDS]
     wordnet_lemmatizer = WordNetLemmatizer()
     lemmed = [wordnet_lemmatizer.lemmatize(w) for w in no_stopwords]
     return [w for w in lemmed if w]
 
-def setup_agg_df(relevant_debates, defaults = ['TRUMP:']):
+def setup_agg_df_lem(relevant_debates, defaults = ['CLINTON:']):
     #aggregate dictionaries
     aggregate_dict = {}
     for d in relevant_debates:
@@ -108,29 +115,62 @@ def setup_agg_df(relevant_debates, defaults = ['TRUMP:']):
             else:
                 aggregate_dict[k] = v
 
-    #setup df - column = candidate name, rows = sentences
+    #setup df - column = candidate name, rows = times spoken
     df_dict = {}
     for candidate in defaults:
         sentence_list = []
         list_words = aggregate_dict[candidate]
         string_words = (' '.join(list_words))
-        textblob = TextBlob(string_words)
-        for sentence in textblob.sentences:
-            sentence = str(sentence)
+        speeches = string_words.split("STOP")
+        for speech in speeches:
+            sentence = str(speech)
             lem_sentence = lemmitize(sentence)
             sent_string = ' '.join(lem_sentence)
+            if len(sent_string.split(" ")) < 5:
+                continue
+            sentence_list.append(sent_string)
+        df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
+    return df_dict_lem
+
+def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
+    #aggregate dictionaries
+    aggregate_dict = {}
+    for d in relevant_debates:
+        for k, v in d.iteritems():
+            if aggregate_dict.has_key(k):
+                aggregate_dict[k] = aggregate_dict[k] + v
+            else:
+                aggregate_dict[k] = v
+
+    #setup df - column = candidate name, rows = times spoken
+    df_dict = {}
+    for candidate in defaults:
+        sentence_list = []
+        list_words = aggregate_dict[candidate]
+        string_words = (' '.join(list_words))
+        speeches = string_words.split("STOP")
+        for speech in speeches:
+            sentence = str(speech)
+            if len(sent_string.split(" ")) < 5:
+                continue
             sentence_list.append(sent_string)
         df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
     return df_dict
 
-def k_means(df_dict, chosen = 'T'):
+def k_means(df_dict, chosen = 'C'):
     for candidate in chosen:
         df = df_dict[candidate]
-        vectorizer = TfidfVectorizer(stop_words='english')
-        X = vectorizer.fit_transform(df['TRUMP:'])
+
+        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
+        X = vectorizer.fit_transform(df['CLINTON:'])
         features = vectorizer.get_feature_names()
         kmeans = KMeans(n_clusters=7)
         kmeans.fit(X)
+
+        #LOOK INTO CLASS BALANCES
+        value_counts = kmeans.labels_
+        value_counter = Counter(value_counts)
+        print value_counter
 
         # 2. Print out the centroids.
         # print "cluster centers:"
@@ -144,33 +184,35 @@ def k_means(df_dict, chosen = 'T'):
 
         print "--------"
         # 4. Limit the number of features and see if the words of the topics change.
-        vectorizer = TfidfVectorizer(stop_words='english', max_features=200)
-        X = vectorizer.fit_transform(df['TRUMP:'])
-        features = vectorizer.get_feature_names()
-        kmeans = KMeans(n_clusters=7)
-        kmeans.fit(X)
-        top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
-        print "top features for each cluster with 200 max features:"
-        for num, centroid in enumerate(top_centroids):
-            print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
+        # vectorizer = TfidfVectorizer(stop_words='english', max_features=100)
+        # X = vectorizer.fit_transform(df['TRUMP:'])
+        # features = vectorizer.get_feature_names()
+        # kmeans = KMeans(n_clusters=6)
+        # kmeans.fit(X)
+        # top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
+        # print "top features for each cluster with 200 max features:"
+        # for num, centroid in enumerate(top_centroids):
+        #     print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
 
         assigned_cluster = kmeans.transform(X).argmin(axis=1)
         for i in range(kmeans.n_clusters):
             cluster = np.arange(0, X.shape[0])[assigned_cluster==i]
             sample_articles = np.random.choice(cluster, 3, replace=False)
             print "cluster %d:" % i
+            pd.set_option('display.max_colwidth', 200)
             for article in sample_articles:
                 print "    %s" % df.ix[article]
-            print "\n\n"
+            print "\n"
+        pd.reset_option('display.max_colwidth')
 
-def hierarch_clust(df_dict, chosen = 'T'):
+def hierarch_clust(df_dict, chosen = 'C'):
     for candidate in chosen:
         df_small = df_dict[candidate]
 
-        df_small['top_5'] = map(lambda x: x[:5], df_small['TRUMP:'])
+        # df_small['top_5'] = map(lambda x: x[:5], df_small['TRUMP:'])
         # first vectorize...
-        vectorizer = TfidfVectorizer(stop_words='english', max_features=10)
-        small_X = vectorizer.fit_transform(df_small['TRUMP:'])
+        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
+        small_X = vectorizer.fit_transform(df_small['CLINTON:'])
         small_features = vectorizer.get_feature_names()
 
         # now get distances
@@ -184,13 +226,13 @@ def hierarch_clust(df_dict, chosen = 'T'):
         # 5. Using scipy's dendrogram function plot the linkages as
         # a hierachical tree.
         dendro = dendrogram(link, color_threshold=1.5, leaf_font_size=9,
-                    labels=df_small['top_5'].values)
+                    labels=small_features)
         # fix spacing to better view dendrogram and the labels
         plt.subplots_adjust(top=.99, bottom=0.5, left=0.05, right=0.99)
         plt.show()
 
 if __name__ == '__main__':
-    all_files = file_grab('R')
+    all_files = file_grab('D')
     relevant_debates = []
     for name, file_name in all_files.iteritems():
         m_t, k_p = setup_buckets(file_name)
@@ -213,7 +255,7 @@ if __name__ == '__main__':
     df_dict = setup_agg_df(relevant_debates)
 
     #KMEANS
-    # k_means(df_dict)
+    k_means(df_dict)
 
     #HIER_ARCH
     # hierarch_clust(df_dict)
