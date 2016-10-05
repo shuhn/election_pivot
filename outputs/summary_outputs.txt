@@ -56,12 +56,9 @@ Or maybe he doesn't want the American people, all of you watching tonight, to kn
 But I want toon behalf of myself, and I think on behalf of a majority of the American people, say that, you know, our word is good.
 
 
-
-
-
 **Clustering**
 
-CLINTON PRIMARIES:: 6 TOPICS
+CLINTON PRIMARIES:: 6 TOPICS, ngram_range=(1,2)
 1) Judgement / Record
 2) Health Care
 3) National Security
@@ -75,3 +72,16 @@ CLINTON PRIMARIES:: 6 TOPICS
 3: social security, social, security, support, going, trust fund, trust, security trust, fund, extend social
 4: american, want, everybody, going, tax, debt, standard, people, college, right
 5: president, obama, frank, president obama, dodd frank, dodd, senator, street, problem, senator sander
+
+TRUMP PRIMARIES:: 4 TOPICS, ngram_range=(1,2)
+1) Make America Great Again "Win Again"
+2) Foreign Policy
+3) Law and Order
+4) Trump Businesses
+
+Counter({0: 27, 2: 27, 1: 15, 3: 8})
+top features for each cluster:
+0: deal, think, want, good, leader, good deal, say, people, president, strong
+1: want, eminent domain, domain, eminent, jeb, money, keystone pipeline, keystone, pipeline, lot
+2: country, going, people, win, job, china, trade, care, tax, law
+3: oil, knock, fight, beat, year, sound, case, banking, bomb, choice

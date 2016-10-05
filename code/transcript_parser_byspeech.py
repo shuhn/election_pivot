@@ -64,6 +64,14 @@ def parse_text(main_text, key_players_textdict, output_counter):
     return key_players_textdict, output_counter
 
 def frequency(key_players_textdict, output_counter):
+    """
+    INPUT:
+    - key_players_textdict (dict) | candidate_name (string) : all words spoken (list)
+    - output_counter (dict): | candidate_name (string) : # of time spokens (int)
+    OUTPUT:
+    - prints intervention values
+    """
+
     total_interventions_list = output_counter.values()
     total_interventions_sum = 0
     num_candidates = len(total_interventions_list)
@@ -77,19 +85,30 @@ def frequency(key_players_textdict, output_counter):
     print ""
 
 def sentiment_analysis(key_players_textdict):
+    """
+    INPUT:
+    - key_players_textdict (dict) | candidate_name (string) : all words spoken (list)
+    OUTPUT:
+    - prints sentiment values for each candidate
+    """
     for candidate, list_words in key_players_textdict.iteritems():
         string_words = (' '.join(list_words))
         textblob = TextBlob(string_words)
         print candidate, textblob.sentiment
 
-def summarize_speech(key_players_textdict, defaults = ['TRUMP:']):
-    # for candidate, list_words in key_players_textdict.iteritems():
-    for candidate in defaults:
-        list_words = key_players_textdict[candidate]
-        string_words = (' '.join(list_words))
-        print candidate
-        print summarizer.summarize(string_words, words = 200)
-        print "-----"
+def summarize_speech(key_players_textdict, keys):
+    """
+    INPUT:
+    - key_players_textdict (dict) | candidate_name (string) : all words spoken (list)
+    - (short_name, long_name)
+    OUTPUT:
+    - prints 200 word summary for key candidate
+    """
+    list_words = key_players_textdict[keys[1]]
+    string_words = (' '.join(list_words))
+    print candidate
+    print summarizer.summarize(string_words, words = 200)
+    print "-----"
 
 def lemmitize(text_string):
     regex = re.compile('<.+?>|[^a-zA-Z]')
@@ -105,7 +124,7 @@ def lemmitize(text_string):
     lemmed = [wordnet_lemmatizer.lemmatize(w) for w in no_stopwords]
     return [w for w in lemmed if w]
 
-def setup_agg_df_lem(relevant_debates, defaults = ['CLINTON:']):
+def setup_agg_df_lem(relevant_debates, keys):
     #aggregate dictionaries
     aggregate_dict = {}
     for d in relevant_debates:
@@ -117,21 +136,22 @@ def setup_agg_df_lem(relevant_debates, defaults = ['CLINTON:']):
 
     #setup df - column = candidate name, rows = times spoken
     df_dict = {}
-    for candidate in defaults:
-        sentence_list = []
-        list_words = aggregate_dict[candidate]
-        string_words = (' '.join(list_words))
-        speeches = string_words.split("STOP")
-        for speech in speeches:
-            sentence = str(speech)
-            lem_sentence = lemmitize(sentence)
-            sent_string = ' '.join(lem_sentence)
-            if len(sent_string.split(" ")) > 7:
-                sentence_list.append(sent_string)
-        df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
+
+    sentence_list = []
+    list_words = aggregate_dict[keys[1]]
+    string_words = (' '.join(list_words))
+    speeches = string_words.split("STOP")
+
+    for speech in speeches:
+        sentence = str(speech)
+        lem_sentence = lemmitize(sentence)
+        sent_string = ' '.join(lem_sentence)
+        if len(sent_string.split(" ")) > 7:
+            sentence_list.append(sent_string)
+    df_dict[keys[0]] = pd.DataFrame(sentence_list, columns = [keys[1]])
     return df_dict
 
-def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
+def setup_agg_df(relevant_debates, keys):
     #aggregate dictionaries
     aggregate_dict = {}
     for d in relevant_debates:
@@ -143,94 +163,90 @@ def setup_agg_df(relevant_debates, defaults = ['CLINTON:']):
 
     #setup df - column = candidate name, rows = times spoken
     df_dict = {}
-    for candidate in defaults:
-        sentence_list = []
-        list_words = aggregate_dict[candidate]
-        string_words = (' '.join(list_words))
-        speeches = string_words.split("STOP")
-        for speech in speeches:
-            sentence = str(speech)
-            if len(sentence.split(" ")) > 7:
-                sentence_list.append(sentence)
-        df_dict[candidate[0]] = pd.DataFrame(sentence_list, columns = [candidate])
+    sentence_list = []
+    list_words = aggregate_dict[keys[1]]
+    string_words = (' '.join(list_words))
+    speeches = string_words.split("STOP")
+    for speech in speeches:
+        sentence = str(speech)
+        if len(sentence.split(" ")) > 7:
+            sentence_list.append(sentence)
+    df_dict[keys[0]] = pd.DataFrame(sentence_list, columns = [keys[1]])
+
     return df_dict
 
-def k_means(df_dict, df_dict_nolem, chosen = 'C'):
-    for candidate in chosen:
-        df = df_dict[candidate]
-        df_nolem = df_dict_nolem[candidate]
+def k_means(df_dict, df_dict_nolem, keys):
 
-        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
-        X = vectorizer.fit_transform(df['CLINTON:'])
-        features = vectorizer.get_feature_names()
-        kmeans = KMeans(n_clusters=6)
-        kmeans.fit(X)
+    df = df_dict[keys[0]]
+    df_nolem = df_dict_nolem[keys[0]]
 
-        #LOOK INTO CLASS BALANCES
-        value_counts = kmeans.labels_
-        value_counter = Counter(value_counts)
-        print value_counter
+    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
+    X = vectorizer.fit_transform(df[keys[1]])
+    features = vectorizer.get_feature_names()
+    kmeans = KMeans(n_clusters=4)
+    kmeans.fit(X)
 
-        # 2. Print out the centroids.
-        # print "cluster centers:"
-        # print kmeans.cluster_centers_
+    #LOOK INTO CLASS BALANCES
+    value_counts = kmeans.labels_
+    value_counter = Counter(value_counts)
+    print value_counter
 
-        # 3. Find the top 10 features for each cluster.
-        top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
-        print "top features for each cluster:"
-        for num, centroid in enumerate(top_centroids):
-            print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
+    # 3. Find the top 10 features for each cluster.
+    top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
+    print "top features for each cluster:"
+    for num, centroid in enumerate(top_centroids):
+        print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
 
-        print "--------"
-        # 4. Limit the number of features and see if the words of the topics change.
-        # vectorizer = TfidfVectorizer(stop_words='english', max_features=100)
-        # X = vectorizer.fit_transform(df['TRUMP:'])
-        # features = vectorizer.get_feature_names()
-        # kmeans = KMeans(n_clusters=6)
-        # kmeans.fit(X)
-        # top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
-        # print "top features for each cluster with 200 max features:"
-        # for num, centroid in enumerate(top_centroids):
-        #     print "%d: %s" % (num, ", ".join(features[i] for i in centroid))
+    print "--------"
 
-        assigned_cluster = kmeans.transform(X).argmin(axis=1)
-        for i in range(kmeans.n_clusters):
-            cluster = np.arange(0, X.shape[0])[assigned_cluster==i]
-            sample_articles = np.random.choice(cluster, 3, replace=False)
-            print "cluster %d:" % i
-            pd.set_option('display.max_colwidth', 400)
-            for article in sample_articles:
-                print "    %s" % df_nolem.ix[article]
-            print "\n"
-        pd.reset_option('display.max_colwidth')
+    assigned_cluster = kmeans.transform(X).argmin(axis=1)
+    for i in range(kmeans.n_clusters):
+        cluster = np.arange(0, X.shape[0])[assigned_cluster==i]
+        sample_speeches = np.random.choice(cluster, 3, replace=False)
+        print "cluster %d:" % i
+        pd.set_option('display.max_colwidth', 400)
+        for speech in sample_speeches:
+            print "    %s" % df_nolem.ix[speech]
+        print "\n"
+    pd.reset_option('display.max_colwidth')
 
-def hierarch_clust(df_dict, chosen = 'C'):
-    for candidate in chosen:
-        df_small = df_dict[candidate]
+def hierarch_clust(df_dict, keys):
+    df_small = df_dict[keys[0]]
 
-        # first vectorize...
-        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
-        small_X = vectorizer.fit_transform(df_small['CLINTON:'])
-        small_features = vectorizer.get_feature_names()
+    # first vectorize...
+    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
+    small_X = vectorizer.fit_transform(df_small[keys[1]])
+    small_features = vectorizer.get_feature_names()
 
-        # now get distances
-        distxy = squareform(pdist(small_X.todense(), metric='cosine'))
-        distxy = np.nan_to_num(distxy)
+    # now get distances
+    distxy = squareform(pdist(small_X.todense(), metric='cosine'))
+    distxy = np.nan_to_num(distxy)
 
-        # 4. Pass this matrix into scipy's linkage function to compute our
-        # hierarchical clusters.
-        link = linkage(distxy, method='complete')
+    # 4. Pass this matrix into scipy's linkage function to compute our
+    # hierarchical clusters.
+    link = linkage(distxy, method='complete')
 
-        # 5. Using scipy's dendrogram function plot the linkages as
-        # a hierachical tree.
-        dendro = dendrogram(link, color_threshold=1.5, leaf_font_size=9,
-                    labels=small_features)
-        # fix spacing to better view dendrogram and the labels
-        plt.subplots_adjust(top=.99, bottom=0.5, left=0.05, right=0.99)
-        plt.show()
+    # 5. Using scipy's dendrogram function plot the linkages as
+    # a hierachical tree.
+    dendro = dendrogram(link, color_threshold=1.5, leaf_font_size=9,
+                labels=small_features)
+    # fix spacing to better view dendrogram and the labels
+    plt.subplots_adjust(top=.99, bottom=0.5, left=0.05, right=0.99)
+    plt.show()
+
+def find_key(candidate):
+    if candidate == 'CLINTON:':
+        return 'C', 'CLINTON:'
+    elif candidate == 'TRUMP:':
+        return 'T', 'TRUMP:'
+    else:
+        print "Sorry, we don't recognize that candidate name."
+        exit()
 
 if __name__ == '__main__':
-    all_files = file_grab('D')
+    candidate = 'TRUMP:'
+    keys = find_key(candidate)
+    all_files = file_grab('R1')
     relevant_debates = []
     for name, file_name in all_files.iteritems():
         m_t, k_p = setup_buckets(file_name)
@@ -239,7 +255,7 @@ if __name__ == '__main__':
 
         #SUMMARIES
         # print name
-        # summarize_speech(key_players_textdict)
+        # summarize_speech(key_players_textdict, keys)
         # print "-----"
 
         #SENTIMENT ANALYSIS
@@ -250,12 +266,11 @@ if __name__ == '__main__':
         relevant_debates.append(key_players_textdict)
 
     #TOPIC MODELING
-    df_dict_nolem = setup_agg_df(relevant_debates)
-    df_dict = setup_agg_df_lem(relevant_debates)
+    df_dict_nolem = setup_agg_df(relevant_debates, keys)
+    df_dict = setup_agg_df_lem(relevant_debates, keys)
 
-    # print df_dict_nolem['C']
     #KMEANS
-    k_means(df_dict, df_dict_nolem)
+    k_means(df_dict, df_dict_nolem, keys)
 
     #HIER_ARCH
-    # hierarch_clust(df_dict)
+    # hierarch_clust(df_dict, keys)

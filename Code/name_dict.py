@@ -27,7 +27,9 @@ def parse_names(key_players):
     'Don Lemon (CNN)' : 'LEMON:',
     'Juan Carlos Lopez (CNN en Espanol)' : 'LOPEZ:',
     'David Muir (ABC News)' : 'MUIR:',
-    'Martha Raddatz (ABC News)' : 'RADDATZ:'}
+    'Martha Raddatz (ABC News)' : 'RADDATZ:',
+    'Mary Katherine Ham' : 'HAM:',
+    'Josh McElveen (WMUR TV)' : 'MCELVEEN'}
 
     participants = {'Former Secretary of State Hillary Clinton' : 'CLINTON:',
     'Former Governor Martin O\'Malley (MD)': 'O\'MALLEY:',
