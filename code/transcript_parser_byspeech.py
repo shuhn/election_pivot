@@ -71,17 +71,24 @@ def frequency(key_players_textdict, output_counter):
     OUTPUT:
     - prints intervention values
     """
-
     total_interventions_list = output_counter.values()
     total_interventions_sum = 0
     num_candidates = len(total_interventions_list)
     for intervention in total_interventions_list:
         total_interventions_sum += int(intervention)
 
+    interventiion_list = []
+    for candidate, intervention in output_counter.iteritems():
+        percent_intervention = float(intervention) / total_interventions_sum
+        output_counter[candidate] = percent_intervention
+        interventiion_list.append(percent_intervention)
+
+    avg_percent_intervention = sum(interventiion_list) / float(len(interventiion_list))
+
     sorted_x = sorted(output_counter.items(), key=operator.itemgetter(1), reverse = True)
     print name
     for tuple1 in sorted_x:
-        print tuple1[0], tuple1[1], round(float(tuple1[1]) / (total_interventions_sum), 2)
+        print tuple1[0], round(float(tuple1[1]) - avg_percent_intervention, 2)
     print ""
 
 def sentiment_analysis(key_players_textdict):
@@ -116,7 +123,7 @@ def lemmitize(text_string):
     tokens = clean_txt.split()
     lowercased = [t.lower() for t in tokens]
     STOPWORDS = stopwords.words('english')
-    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing']
+    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going','say', 'want', 'year']
     for word in new_stop:
         STOPWORDS.append(word)
     no_stopwords = [w for w in lowercased if not w in STOPWORDS]
@@ -191,6 +198,11 @@ def k_means(df_dict, df_dict_nolem, keys):
     value_counter = Counter(value_counts)
     print value_counter
 
+    # print "CENTERS: "
+    # for center in kmeans.cluster_centers_:
+    #     print center
+    #     print center.shape
+
     # 3. Find the top 10 features for each cluster.
     top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
     print "top features for each cluster:"
@@ -243,10 +255,27 @@ def find_key(candidate):
         print "Sorry, we don't recognize that candidate name."
         exit()
 
+def agg_summarizer(df_dict_nolem):
+    long_string = []
+    for array1 in df_dict_nolem[keys[0]].values:
+        long_string.append(' '.join(array1))
+
+    long_string = ' '.join(long_string)
+    print summarizer.summarize(long_string, words = 300)
+
+def agg_sentiment(df_dict_nolem):
+    long_string = []
+    for array1 in df_dict_nolem[keys[0]].values:
+        long_string.append(' '.join(array1))
+    long_string = ' '.join(long_string)
+    textblob = TextBlob(long_string)
+    print textblob.sentiment
+
+
 if __name__ == '__main__':
     candidate = 'TRUMP:'
     keys = find_key(candidate)
-    all_files = file_grab('R1')
+    all_files = file_grab('R')
     relevant_debates = []
     for name, file_name in all_files.iteritems():
         m_t, k_p = setup_buckets(file_name)
@@ -256,6 +285,10 @@ if __name__ == '__main__':
         #SUMMARIES
         # print name
         # summarize_speech(key_players_textdict, keys)
+        # print "-----"
+
+        #FREQUENCY
+        # frequency(key_players_textdict, output_counter)
         # print "-----"
 
         #SENTIMENT ANALYSIS
@@ -268,6 +301,12 @@ if __name__ == '__main__':
     #TOPIC MODELING
     df_dict_nolem = setup_agg_df(relevant_debates, keys)
     df_dict = setup_agg_df_lem(relevant_debates, keys)
+
+    #AGG SUMMARIZER
+    # agg_summarizer(df_dict_nolem)
+
+    #AGG SENTIMENT ANALYSIS
+    # agg_sentiment(df_dict_nolem)
 
     #KMEANS
     k_means(df_dict, df_dict_nolem, keys)

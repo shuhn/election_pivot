@@ -29,7 +29,7 @@ def parse_names(key_players):
     'David Muir (ABC News)' : 'MUIR:',
     'Martha Raddatz (ABC News)' : 'RADDATZ:',
     'Mary Katherine Ham' : 'HAM:',
-    'Josh McElveen (WMUR TV)' : 'MCELVEEN'}
+    'Josh McElveen (WMUR TV)' : 'MCELVEEN:'}
 
     participants = {'Former Secretary of State Hillary Clinton' : 'CLINTON:',
     'Former Governor Martin O\'Malley (MD)': 'O\'MALLEY:',
@@ -73,7 +73,7 @@ def file_grab(name = 'All'):
     elif name == 'G':
         return {'1st General Election Debate: September 9th, 2016' : 'data/G_9_26_16.txt'}
     elif name == 'R1':
-        return {'1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt'}
+        return {'2nd Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt'}
     else:
         return {'1st Democratic Debate: October 10th, 2015' : 'data/D_10_13_15.txt',
         '1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt',

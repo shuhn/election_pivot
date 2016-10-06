@@ -1,87 +1,121 @@
-**1st Republican Debate: August 8th, 2015**
-*TRUMP:*
-I've been challenged by so many people, and I don't frankly have time for total political correctness. Border Patrol, people that I deal with, that I talk to, they say this is what's happening. So I just want to say. If I ask them, if I need them, you know, most of the people on this stage I've given to, just so you understand, a lot of money. Because I have used the laws of this country just like the greatest people that you read about every day in business have used the laws of this country, the chapter laws, to do a great job for my company, for myself, for my employees, for my family, et cetera. Out of hundreds of deals that I've done, hundreds, on four occasions I've taken advantage of the laws of this country, like other people. I had the good sense, and I've gotten a lot of credit in the financial pages, seven years ago I left Atlantic City before it totally cratered, and I made a lot of money in Atlantic City, and I'm very proud of it. Now, with Iran, we're making a deal, you would say, we want him.
------
-**2nd Republican Debate: February 6th, 2016**
-*TRUMP:*
-That's what's going to happen with our enemies and the people we compete against. We're going to take care of people that are dying on the street because there will be a group of people that are not going to be able to even think in terms of private or anything else and we're going to take care of those people. And a lot of the big conservatives that tell me how conservative they are I think I'm more than they are they tell me, oh well, they all want the Keystone Pipeline. And what a lot of people don't know because they were all saying, oh, you're going to take their property. I'm going to do the right thing for the American public. And one thing on the vets during the last debate, I raised $6 million for the vets, and I will tell you something...[applause]...I will tell you that I think nobody here, nobody on this stage, gets along with the veterans groups in New Hampshire better than I do without ball (ph) to sarel (ph) and all of the people that I deal with and these are great people.
+**Frequency**
+1st Republican Debate: August 8th, 2015
+TRUMP: 0.14
+PAUL: 0.05
+CHRISTIE: 0.02
+RUBIO: -0.02
+WALKER: -0.03
+KASICH: -0.03
+BUSH: -0.03
+HUCKABEE: -0.03
+CARSON: -0.04
+CRUZ: -0.05
 
 -----
-**3rd Republican Debate: March 10th, 2016**
-*TRUMP:*
-Look, I'm just saying very simply we have a country that I've never seen anything like it. There's something going on that maybe you don't know about, maybe a lot of other people don't know about, but there's tremendous hatred.
-But I will tell you, I think if we're going to ever negotiate a peace settlement, which every Israeli wants, and I've spoken to the toughest and the sharpest, they all want peace, I think it would be much more helpful is I'm a negotiator. What I want is I want a much better deal to be made because right now, Cuba is making as usual with our country, we don't make good deal.
-And I think after 50 years, and I have many friends, I own many properties in Miami, many, many, and I have many people that know and they feel exactly the way I do, make a deal, it would be great, but it's got to be a great deal for the United States, not a bad deal for the United States. People come with tremendous passion and love for the country, and when they see protest in some cases you know, you're mentioning one case, which I haven't seen, I heard about it, which I don't like.
------
-**1st General Election Debate: September 9th, 2016**
-*TRUMP:*
-Well, for one thingand before we start on thatmy father gave me a very small loan in 1975, and I built it into a company that's worth many, many billions of dollars, with some of the greatest assets in the world, and I say that only because that's the kind of thinking that our country needs.
-And when these people are going to put billions and billions of dollars into companies, and when they're going to bring $2.5 trillion back from overseas, where they can't bring the money back, because politicians like Secretary Clinton won't allow them to bring the money back, because the taxes are so onerous, and the bureaucratic red tape, so whatis so bad.
-Our country is suffering because people like Secretary Clinton have made such bad decisions in terms of our jobs and in terms of what's going on.
-Or, as I've been saying for a long time, and I think you'll agree, because I said it to you once, had we taken the oiland we should have taken the oilISIS would not have been able to form either, because the oil was their primary source of income.
-Well, I have to say that, you know, for what Secretary Clinton was saying about nuclear with Russia, she's very cavalier in the way she talks about various countries.
------
+2nd Republican Debate: February 6th, 2016
+TRUMP: 0.06
+BUSH: 0.06
+RUBIO: 0.05
+CHRISTIE: -0.02
+CRUZ: -0.04
+KASICH: -0.04
+CARSON: -0.07
 
-**1st Democratic Debate: October 10th, 2015**
-*CLINTON:*
-And, I think it's important too that the United States make it very clear to Putin that it's not acceptable for him to be in Syria creating more chaos, bombing people on behalf of Assad, and we can't do that if we don't take more of a leadership position, which is what I'm advocating.
-You know, I believe strongly that we need to be talking about what people talk to me about, like how are we going to make college affordable?
+------
+3rd Republican Debate: March 10th, 2016
+TRUMP: 0.13
+RUBIO: -0.02
+CRUZ: -0.02
+KASICH: -0.1
+
+-----
+1st Democratic Debate: October 10th, 2015
+CLINTON: 0.11
+SANDERS: 0.06
+O'MALLEY: -0.01
+WEBB: -0.06
+CHAFEE: -0.1
+
+-----
+2nd Democratic Debate: January 17th, 2016
+SANDERS: 0.12
+CLINTON: -0.05
+O'MALLEY: -0.07
+
+-----
+3rd Democratic Debate: April 4th, 2016
+SANDERS: 0.02
+CLINTON: -0.02
+
+
+**SUMMARIES (300 WORDS)**
+TRUMP:
+Border Patrol, people that I deal with, that I talk to, they say this is what's happening.
+Out of hundreds of deals that I've done, hundreds, on four occasions I've taken advantage of the laws of this country, like other people.
+Look, I'm just saying very simply we have a country that I've never seen anything like it.
+But it has to be something because our country and our trade and our deals and most importantly our jobs are going to hell.
+There's something going on that maybe you don't know about, maybe a lot of other people don't know about, but there's tremendous hatred.
+But I will tell you, I think if we're going to ever negotiate a peace settlement, which every Israeli wants, and I've spoken to the toughest and the sharpest, they all want peace, I think it would be much more helpful is I'm a negotiator.
+What I want is I want a much better deal to be made because right now, Cuba is making as usual with our country, we don't make good deal.
+And I think after 50 years, and I have many friends, I own many properties in Miami, many, many, and I have many people that know and they feel exactly the way I do, make a deal, it would be great, but it's got to be a great deal for the United States, not a bad deal for the United States.
+People come with tremendous passion and love for the country, and when they see protest in some cases you know, you're mentioning one case, which I haven't seen, I heard about it, which I don't like.
+And what a lot of people don't know because they were all saying, oh, you're going to take their property.
+
+CLINTON:
+And I, as president, will keep trying to give that to them   Yes, well, I...[applause]...I...[applause]...I I would just point out that there was a vote in the Senate as to whether or not the United States should support the efforts by the Libyan people to protect themselves against the threats, the genocidal threats coming from Gadhafi, and whether we should go to the United Nations to seek Security Council support.
 I'm campaigning because I think I have the right combination of what the country needs, at this point, and I think I can take the fight to the Republicans, because we cannot afford a Republican to succeed Barack Obama as president of the United States.
-Well, look, you know, when people say that it's always the Republicans or their sympathizers who say, "You can't have paid leave, you can't provide health care." They don't mind having big government to interfere with a woman's right to choose and to try to take down Planned Parenthood.
 I do support the use of medical marijuana, and I think even there we need to do a lot more research so that we know exactly how we're going to help people for whom medical marijuana provides relief.
-
----
-
-**2nd Democratic Debate: January 17th, 2016**
-*CLINTON:*
-The Republicans just voted last week to repeal the Affordable Care Act, and thank goodness, President Obama vetoed it and saved Obamacare for the American people.
-Well, as someone who as someone who has a little bit of experience standing up to the health insurance industry, that spent, you know...[applause]...many, many millions of dollars attacking me, and probably will so again, because of what I believe we can do building on the Affordable Care Act, I think it's important to point out that there are a lot of reasons we have the health care system we have today.
 Look, I have the greatest respect for Senator Sanders and for his supports and I'm going to keep working as hard as I can to reach as many people of all ages about what I will do, what the experience and the ideas that I have that I will bring to the White House and I hope to have their support when I'm the Democratic nominee.
-I issued a statement about what we needed to do and then I went on a T.V. show and I said, "it was outrageous that the governor hadn't acted and within two hours he had." I want to be a president who takes care of the big problems and the problems that are affecting the people of our country everyday.
-
-----
-**3rd Democratic Debate: April 4th, 2016**
-*CLINTON:*
-I was so honored to serve as a senator from New York for eight years...[applause]...and to work to provide opportunity for all of our citizens to make it possible that we could knock down the barriers that stand in the way of people getting ahead and staying ahead.
-I continued to work on that throughout the four years as Secretary of State, and I was very proud that President Obama and America led the way to the agreement that was finally reached in Paris with 195 nations committing to take steps to actually make a difference in climate change.
-And I, as president, will keep trying to give that to them Yes, well, I...[applause]...I...[applause]...I I would just point out that there was a vote in the Senate as to whether or not the United States should support the efforts by the Libyan people to protect themselves against the threats, the genocidal threats coming from Gadhafi, and whether we should go to the United Nations to seek Security Council support.
-I'm asking for your support again in the primary on Tuesday to continue that work together, to take what we did in New York and to take those New York values to the White House, and put them to work on behalf of all of our people, to knock down the barriers that stand in the way.
------
-**1st General Election Debate: September 9th, 2016**
-*CLINTON:*
-Independent experts have looked at what I've proposed and looked at what Donald's proposed, and basically they've said this, that if his tax plan, which would blow up the debt by over $5 trillion and would in some instances disadvantage middle-class families compared to the wealthy, were to go into effect, we would lose 3.5 million jobs and maybe have another recession.
-They've looked at my plans and they've said, OK, if we can do this, and I intend to get it done, we will have 10 million more new jobs, because we will be making investments where we can grow the economy.
-And I think it's important to look at what we need to do to get the economy going again.
-Or maybe he doesn't want the American people, all of you watching tonight, to know that he's paid nothing in federal taxes, because the only years that anybody's ever seen were a couple of years when he had to turn them over to state authorities when he was trying to get a casino license, and they showed he didn't pay any federal income tax.
-But I want toon behalf of myself, and I think on behalf of a majority of the American people, say that, you know, our word is good.
+I issued a statement about what we needed to do and then I went on a T.V. show and I said, "it was outrageous that the governor hadn't acted and within two hours he had."   I want to be a president who takes care of the big problems and the problems that are affecting the people of our country everyday.
 
 
 **Clustering**
 
-CLINTON PRIMARIES:: 6 TOPICS, ngram_range=(1,2)
-1) Judgement / Record
-2) Health Care
-3) National Security
-4) Social Security
-5) Education
-6) Financial Regulation
+CLINTON PRIMARIES:: 8 TOPICS, ngram_range=(1,2)
+0) National Security
+1) Drug Policy
+2) Education
+3) Social Security
+4) Health Care
+5) Financial Regulation
+6) Climate Change
+7) Gun Control
 
-0: people, think, america, good, gun, need, country, new, running, work
-1: health, care, health care, cost, health insurance, care act, affordable care, insurance, affordable, act
-2: got, think, syria, try, state, position, president, united, trying, weapon
-3: social security, social, security, support, going, trust fund, trust, security trust, fund, extend social
-4: american, want, everybody, going, tax, debt, standard, people, college, right
-5: president, obama, frank, president obama, dodd frank, dodd, senator, street, problem, senator sander
+Counter({7: 35, 2: 24, 4: 20, 1: 18, 5: 14, 6: 13, 0: 12, 3: 8})
+top features for each cluster:
+0: nato, need, terrorist, country, security, leader, world, think, europe, easy
+1: think, state, plan, got, approach, comprehensive, marijuana, family, make, people
+2: right, people, college, young, thing, young people, debt, think, make, pay
+3: social, social security, security, trust fund, trust, security trust, fund, extend social, extend, privatize
+4: care, health, affordable care, care act, cost, act, health care, affordable, insurance, governor
+5: frank, dodd, dodd frank, president, yes, try, president obama, obama, decision, build dodd
+6: president, agreement, change, woman president, obama, think, climate, climate change, president obama, woman
+7: senator, gun, sander, senator sander, new york, york, people, new, nra, voted
 
 TRUMP PRIMARIES:: 4 TOPICS, ngram_range=(1,2)
-1) Make America Great Again "Win Again"
-2) Foreign Policy
-3) Law and Order
-4) Trump Businesses
+0) Make America Great Again "Win Again" Better Deals
+1) Foreign Policy  
+2) Immigration
+3) Domestic Policy (Taxes, Healthcare)
 
-Counter({0: 27, 2: 27, 1: 15, 3: 8})
+Counter({0: 30, 1: 21, 2: 13, 3: 11})
 top features for each cluster:
-0: deal, think, want, good, leader, good deal, say, people, president, strong
-1: want, eminent domain, domain, eminent, jeb, money, keystone pipeline, keystone, pipeline, lot
-2: country, going, people, win, job, china, trade, care, tax, law
-3: oil, knock, fight, beat, year, sound, case, banking, bomb, choice
+0: country, people, win, law, job, police, trade, million, right, like
+1: deal, think, make, president, israel, want, make deal, way, iran, united state
+2: leader, knock, border, strong, mean, bad, fight, time, medieval, medieval time
+3: care, bid, tax, hillary, beat, health, change, obamacare, line, wedding
+
+
+**SENTIMENT**
+TRUMP PRIMARIES
+Sentiment(polarity=0.1558474633980254, subjectivity=0.518318635796163)
+
+TRUMP G
+Sentiment(polarity=0.1308690964538689, subjectivity=0.522318577985768)
+
+CLINTON PRIMARIES
+Sentiment(polarity=0.1554673081437431, subjectivity=0.47772320427224724)
+
+CLINTON G
+Sentiment(polarity=0.168557660881379, subjectivity=0.4777032594660803)
+#maybe result of CLINTON mirroring more of Trump's language?

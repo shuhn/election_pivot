@@ -190,7 +190,7 @@ def hierarch_clust(df_dict, chosen = 'T'):
         plt.show()
 
 if __name__ == '__main__':
-    all_files = file_grab('R')
+    all_files = file_grab('R1')
     relevant_debates = []
     for name, file_name in all_files.iteritems():
         m_t, k_p = setup_buckets(file_name)
