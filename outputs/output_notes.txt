@@ -1,0 +1,295 @@
+**Frequency**
+*Republican*
+#Maybe track this with poll numbers?
+1st Republican Debate: August 6th, 2015
+TRUMP: 0.15
+PAUL: 0.06
+CHRISTIE: 0.03
+RUBIO: -0.01
+WALKER: -0.02
+KASICH: -0.02
+BUSH: -0.02
+HUCKABEE: -0.02
+CARSON: -0.03
+CRUZ: -0.04
+FIORINA: -0.08
+
+2nd Republican Debate: September 16th, 2015
+TRUMP: 0.15
+BUSH: 0.05
+FIORINA: 0.03
+PAUL: -0.01
+KASICH: -0.02
+RUBIO: -0.02
+WALKER: -0.03
+CHRISTIE: -0.03
+CARSON: -0.03
+CRUZ: -0.04
+HUCKABEE: -0.05
+
+3rd Republican Debate: October 28th, 2015
+TRUMP: 0.03
+RUBIO: 0.03
+HUCKABEE: 0.02
+FIORINA: 0.01
+CRUZ: 0.01
+KASICH: 0.0
+BUSH: 0.0
+CARSON: -0.02
+PAUL: -0.04
+CHRISTIE: -0.04
+
+4th Republican Debate: November 10th, 2015
+TRUMP: 0.05
+KASICH: 0.04
+PAUL: 0.03
+CRUZ: 0.01
+FIORINA: -0.01
+BUSH: -0.03
+RUBIO: -0.03
+CARSON: -0.06
+
+5th Republican Debate: December 15th, 2015
+TRUMP: 0.11
+CRUZ: 0.06
+BUSH: 0.02
+RUBIO: 0.01
+FIORINA: -0.01
+PAUL: -0.03
+CARSON: -0.04
+KASICH: -0.05
+CHRISTIE: -0.06
+
+6th Republican Debate: January 14th, 2016
+TRUMP: 0.15
+CRUZ: 0.07
+BUSH: 0.02
+RUBIO: -0.02
+CHRISTIE: -0.06
+CARSON: -0.07
+KASICH: -0.09
+
+7th Republican Debate: February 6th, 2016
+TRUMP: 0.06
+BUSH: 0.06
+RUBIO: 0.05
+CHRISTIE: -0.02
+CRUZ: -0.04
+KASICH: -0.04
+CARSON: -0.07
+
+8th Republican Debate: February 13th, 2016
+TRUMP: 0.18
+BUSH: 0.09
+CRUZ: 0.01
+RUBIO: -0.06
+KASICH: -0.1
+CARSON: -0.12
+
+9th Republican Debate: February 25th, 2016
+TRUMP: 0.24
+RUBIO: 0.06
+CRUZ: -0.01
+KASICH: -0.13
+CARSON: -0.16
+
+10th Republican Debate: March 3rd, 2016
+TRUMP: 0.29
+RUBIO: -0.01
+CRUZ: -0.11
+KASICH: -0.17
+
+11th Republican Debate: March 10th, 2016
+TRUMP: 0.13
+RUBIO: -0.02
+CRUZ: -0.02
+KASICH: -0.1
+
+*Democratic*
+
+1st Democratic Debate: October 13th, 2015
+CLINTON: 0.11
+SANDERS: 0.06
+O'MALLEY: -0.01
+WEBB: -0.06
+CHAFEE: -0.1
+
+2nd Democratic Debate: November 14th, 2015
+SANDERS: 0.06
+CLINTON: 0.0
+O'MALLEY: -0.06
+
+3rd Democratic Debate: December 19th, 2015
+CLINTON: 0.06
+SANDERS: 0.05
+O'MALLEY: -0.11
+
+4th Democratic Debate: January 17th, 2016
+SANDERS: 0.12
+CLINTON: -0.05
+O'MALLEY: -0.07
+
+5th Democratic Debate: February 4th, 2016
+SANDERS: 0.03
+CLINTON: -0.03
+
+6th Democratic Debate: February 11th, 2016
+SANDERS: 0.04
+CLINTON: -0.04
+
+7th Democratic Debate: March 6th, 2016
+SANDERS: 0.01
+CLINTON: -0.01
+
+8th Democratic Debate: March 9th, 2016
+SANDERS: 0.03
+CLINTON: -0.03
+
+9th Democratic Debate: April 4th, 2016
+SANDERS: 0.02
+CLINTON: -0.02
+
+**SUMMARIES (300 WORDS)**
+TRUMP:
+I say not in a braggadocious way, I've made billions and billions of dollars dealing with people all over the world, and I want to put whatever that talent is to work for this country so we have great trade deals, we make our country rich again, we make it great again.
+Many of the great business people that you know and Carl Icon (ph) is going to work with me on making great deals for this country.
+...I will know more about the problems of this world by the time I sit, and you look at what's going in this world right now by people that supposedly know, this world is a mess.
+We have people that know what is going on.
+I've gained great respect for many and I'm going to even say I mean, in different forms for the people on the dais, in different forms.
+But one thing I'm also going to do, I'm going to be getting bringing a lot of people in who are Democrats, who are independents, and you're seeing that with the polls, because if you look at anywhere, look at any of the elections, every single election, it has been record-setting.
+I will not we're going to have private we are going to have health care, but I will not allow people to die on the sidewalks and the streets of our country if I'm president.
+And what a lot of people don't know because they were all saying, oh, you're going to take their property.
+And I think after 50 years, and I have many friends, I own many properties in Miami, many, many, and I have many people that know and they feel exactly the way I do, make a deal, it would be great, but it's got to be a great deal for the United States, not a bad deal for the United States.
+
+CLINTON:
+And, you know, I do think it's important to do exactly what Senator Sanders said, and that is to start talking about the issues that the American people really care about, and that they talk to each of us about.
+I've heard a lot about me in this debate, and I'm going to keep talking and thinking about all of you because ultimately, I think the president's job is to do everything possible, everything that she can do to lift up the people of this country.
+So if -- if people who are in the private sector know what I stand for, it's what I fought for as a senator, it's what I will do as president, and they want to be part of once again building our economy so it works for everybody, more power to them, because they are the kind of business leaders who understand that if we don't get the American economy moving and growing, we're not going to recognize our country and we're not going to give our kids the same opportunities that we had.
+So I see as president having a constant dialogue with Americans here's what we're trying to get done, here's why I need your help, here's why you may think comprehensive immigration reform with a path to citizenship isn't something you care about, but I'm telling you it will help fix the labor market, it will bring people out of the shadows   Well, I'm certainly going to unite the party, but I'm notI'm not getting ahead of myself.
+Between the Republicans trying to repeal the first chance we've ever had to get to universal health care, and Senator Sanders wanting to throw us into a contentious debate over single-payer, I think the smart approach is build on and protect the Affordable Care Act. Make it work.
+
+
+**Clustering**
+
+CLINTON PRIMARIES:: 8 TOPICS, ngram_range=(1,3)
+0) Financial Regulation
+1) Health Care
+2) Education
+3) Gun Control
+4) Immigration
+5) Foreign Policy
+6) Law Enforcement
+7) Jobs / Opportunity
+
+Counter({5: 64, 0: 62, 7: 60, 4: 52, 2: 44, 3: 30, 1: 29, 6: 29})
+top features for each cluster:
+0: street, wall street, wall, president, obama, frank, president obama, dodd frank, dodd, company
+1: care, health, affordable, health care, affordable care, affordable care act, care act, cost, act, coverage
+2: debt, tax, college, raise, pay, american, family, right, middle class, class
+3: gun, immunity, nra, voted, seller, got, country, maker, absolute immunity, absolute
+4: comprehensive, president, reform, immigration, comprehensive immigration, comprehensive immigration reform, immigration reform, criminal, work, justice
+5: state, support, united, security, isi, try, united state, president, syria, threat
+6: child, process, law, story, index, like, young, law enforcement, enforcement, heard
+7: barrier, way, work, stand, got, time, president, american, job, america
+
+TRUMP PRIMARIES:: 4 TOPICS, ngram_range=(1,3)
+0) Foreign Policy
+1) Make America Great Again - Trade Policy / Jobs
+2) Immigration
+3) Hillary's Record
+
+Counter({1: 125, 2: 117, 0: 58, 3: 18})
+top features for each cluster:
+0: oil, look, used, isi, knock, mean, country, thing, money, world
+1: win, deal, company, ok, way, year, number, guy, china, right
+2: country, deal, great, wall, problem, job, border, leader, president, talking
+3: beat, hillary, clinton, hillary clinton, poll, beat hillary, beat hillary clinton, million, vote, win
+
+
+**SENTIMENT**
+TRUMP PRIMARIES
+Polarity and Sentiment for: TRUMP:
+Sentiment(polarity=0.1457374323829649, subjectivity=0.5115024421623825)
+NLTK Prob of Positive: 0.428836133066
+total length: 474
+
+TRUMP G
+Polarity and Sentiment for: TRUMP:
+Sentiment(polarity=0.1308690964538689, subjectivity=0.522318577985768)
+NLTK Prob of Positive:  0.416889480147
+total length: 66
+
+CLINTON PRIMARIES
+Polarity and Sentiment for: CLINTON:
+Sentiment(polarity=0.15619613021437437, subjectivity=0.47152382115063873)
+NLTK Prob of Positive:  0.510442829001
+total length: 307
+
+CLINTON G
+Polarity and Sentiment for: CLINTON:
+Sentiment(polarity=0.168557660881379, subjectivity=0.4777032594660803)
+NLTK Prob of Positive:  0.491802025154
+total length: 52
+
+#maybe result of CLINTON mirroring more of Trump's language?
+
+*Sentiment by Debate*
+1st Republican Debate: August 6th, 2015
+TRUMP: Sentiment(polarity=0.18323112869470484, subjectivity=0.5025577200577201)
+NLTK Prob of Positive:  0.498418281766
+total length: 1
+
+2nd Republican Debate: September 16th, 2015
+TRUMP: Sentiment(polarity=0.1485126496741541, subjectivity=0.5103902169610135)
+NLTK Prob of Positive:  0.432747828915
+total length: 1
+
+3rd Republican Debate: October 28th, 2015
+TRUMP: Sentiment(polarity=0.12610427649753495, subjectivity=0.5206509065216934)
+NLTK Prob of Positive:  0.26865534758
+total length: 1
+
+4th Republican Debate: November 10th, 2015
+TRUMP: Sentiment(polarity=0.09557789817277772, subjectivity=0.5221316086858256)
+NLTK Prob of Positive:  0.137228892799
+total length: 1
+
+5th Republican Debate: December 15th, 2015
+TRUMP: Sentiment(polarity=0.18150831087151825, subjectivity=0.5249932614555256)
+NLTK Prob of Positive:  0.169367906667
+total length: 1
+
+6th Republican Debate: January 14th, 2016
+TRUMP: Sentiment(polarity=0.12327191366553077, subjectivity=0.5250730097325845)
+NLTK Prob of Positive:  Neutral
+total length: 0
+
+7th Republican Debate: February 6th, 2016
+TRUMP: Sentiment(polarity=0.19857681909406033, subjectivity=0.5010291889889593)
+NLTK Prob of Positive:  Neutral
+total length: 0
+
+8th Republican Debate: February 13th, 2016
+TRUMP: Sentiment(polarity=0.10899555723207177, subjectivity=0.4912808284385049)
+NLTK Prob of Positive:  Neutral
+total length: 0
+
+9th Republican Debate: February 25th, 2016
+TRUMP: Sentiment(polarity=0.1572293354598617, subjectivity=0.5156186481354902)
+NLTK Prob of Positive:  0.315040283413
+total length: 1
+
+10th Republican Debate: March 3rd, 2016
+TRUMP: Sentiment(polarity=0.12760560638504956, subjectivity=0.49237149716807155)
+NLTK Prob of Positive:  Neutral
+total length: 0
+
+11th Republican Debate: March 10th, 2016
+TRUMP: Sentiment(polarity=0.12941285841696507, subjectivity=0.5332452124649246)
+NLTK Prob of Positive:  0.537386354502
+total length: 1
+
+#all Clinton Debates are ambiguous, only significant when judged on aggregate basis
+
+**Questions for Future Research**
+- How similar are VP to their leaders? Mirror language?

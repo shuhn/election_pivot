@@ -1,3 +1,4 @@
+import urllib
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
@@ -15,6 +16,7 @@ import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage, dendrogram
 from nltk.stem import WordNetLemmatizer
 from collections import Counter
+from sklearn.decomposition import PCA
 
 def setup_buckets(file_name):
     """
@@ -91,17 +93,54 @@ def frequency(key_players_textdict, output_counter):
         print tuple1[0], round(float(tuple1[1]) - avg_percent_intervention, 2)
     print ""
 
-def sentiment_analysis(key_players_textdict):
+def sentiment_analysis(key_players_textdict, keys):
     """
     INPUT:
     - key_players_textdict (dict) | candidate_name (string) : all words spoken (list)
     OUTPUT:
     - prints sentiment values for each candidate
     """
-    for candidate, list_words in key_players_textdict.iteritems():
-        string_words = (' '.join(list_words))
-        textblob = TextBlob(string_words)
-        print candidate, textblob.sentiment
+    list_words = key_players_textdict[keys[1]]
+    string_words = (' '.join(list_words))
+    textblob = TextBlob(string_words)
+    print candidate, textblob.sentiment
+
+def nltk_sentiment(key_players_textdict, keys):
+    """
+    INPUT:
+    - key_players_textdict (dict) | candidate_name (string) : all words spoken (list)
+    OUTPUT:
+    - prints nltk sentiment values for each candidate
+    """
+    output_data = []
+
+    list_words = key_players_textdict[keys[1]]
+    string_words = (' '.join(list_words))
+
+    dict_string = {"text" : string_words}
+    data = urllib.urlencode(dict_string)
+    u = urllib.urlopen("http://text-processing.com/api/sentiment/", data)
+    the_page = u.read()
+
+    items = the_page.split(':')
+    imp_items = items[2:4]
+    output_list = []
+    for string1 in imp_items:
+        output_list.append(float(string1.split(',')[0]))
+
+    if output_list[1] < .5:
+        #as long as neutral prob isn't > .5
+        output_data.append(1-output_list[0])
+
+    print output_list
+
+    # try:
+    #     prob_positive = sum(output_data) / len(output_data)
+    # except ZeroDivisionError:
+    #     prob_positive = 'Neutral'
+    # print "NLTK Prob of Positive: ", prob_positive
+    # print "total length:", len(output_data)
+    print ''
 
 def summarize_speech(key_players_textdict, keys):
     """
@@ -129,7 +168,7 @@ def lemmitize(text_string):
     tokens = clean_txt.split()
     lowercased = [t.lower() for t in tokens]
     STOPWORDS = stopwords.words('english')
-    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going', 'say', 'want', 'year', 'inaudible', 'know', 'think', 'later']
+    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going', 'say', 'want', 'year', 'inaudible', 'know', 'think', 'later', 'thing', 'york', 'new', 'said', 'people', 'cnn', 'jeb', 'florida', 'able', 'unidentifiable', 'need', 'ted', 'trump', 'ben', 'senator', 'sanders', 'make', 'flint', 'question', 'tell', 'come', 'like']
     for word in new_stop:
         STOPWORDS.append(word)
     no_stopwords = [w for w in lowercased if not w in STOPWORDS]
@@ -217,10 +256,15 @@ def k_means(df_dict, df_dict_nolem, keys, n_clusters_):
     df = df_dict[keys[0]]
     df_nolem = df_dict_nolem[keys[0]]
 
-    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
+    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
     X = vectorizer.fit_transform(df[keys[1]])
+
+    #PCA
+    # pca = PCA(n_components = 4)
+    # X = pca.fit_transform(X.toarray())
+
     features = vectorizer.get_feature_names()
-    kmeans = KMeans(n_clusters=n_clusters_)
+    kmeans = KMeans(n_clusters=n_clusters_, max_iter = 1000, n_init = 100)
     kmeans.fit(X)
 
     #LOOK INTO CLASS BALANCES
@@ -233,7 +277,7 @@ def k_means(df_dict, df_dict_nolem, keys, n_clusters_):
     #     print center
     #     print center.shape
 
-    # 3. Find the top 10 features for each cluster.
+    # Find the top 10 features for each cluster.
     top_centroids = kmeans.cluster_centers_.argsort()[:,-1:-11:-1]
     print "top features for each cluster:"
     for num, centroid in enumerate(top_centroids):
@@ -264,7 +308,7 @@ def hierarch_clust(df_dict, keys):
     df_small = df_dict[keys[0]]
 
     # first vectorize...
-    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
+    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
     small_X = vectorizer.fit_transform(df_small[keys[1]])
     small_features = vectorizer.get_feature_names()
 
@@ -329,9 +373,7 @@ def agg_sentiment(df_dict_nolem):
     textblob = TextBlob(long_string)
     print textblob.sentiment
 
-def nltk_sentiment(df_dict_nolem):
-    import urllib
-
+def agg_nltk_sentiment(df_dict_nolem):
     output_data = []
     for array1 in df_dict_nolem[keys[0]].values:
         long_string = ' '.join(array1)
@@ -339,27 +381,26 @@ def nltk_sentiment(df_dict_nolem):
         data = urllib.urlencode(dict_string)
         u = urllib.urlopen("http://text-processing.com/api/sentiment/", data)
         the_page = u.read()
-        output_data.append(the_page)
 
-    pos_prob_list = []
+        items = the_page.split(':')
+        imp_items = items[2:4]
+        output_list = []
+        for string1 in imp_items:
+            output_list.append(float(string1.split(',')[0]))
 
-    for point in output_data:
-        negative_prob = float(point[25:41])
-        neu_prob = float(point[55:72])
-        if neu_prob < .5:
-            pos_prob_list.append(1-negative_prob)
+        if output_list[1] < .5:
+            #as long as neutral prob isn't > .5
+            output_data.append(1-output_list[0])
 
-    print sum(pos_prob_list) / len(pos_prob_list)
-    print "total length:", len(pos_prob_list)
-
-
+    print "NLTK Prob of Positive: ", sum(output_data) / len(output_data)
+    print "total length:", len(output_data)
 
 if __name__ == '__main__':
     candidate = 'TRUMP:'
     keys = find_key(candidate)
-    all_files = file_grab('G')
+    chosen_debates = file_grab('R')
     relevant_debates = []
-    for name, file_name in all_files.iteritems():
+    for name, file_name in chosen_debates.iteritems():
         m_t, k_p = setup_buckets(file_name)
         mods, parts, key_players, output_counter = parse_names(k_p)
         key_players_textdict, output_counter = parse_text(m_t, key_players, output_counter)
@@ -369,20 +410,20 @@ if __name__ == '__main__':
         # summarize_speech(key_players_textdict, keys)
         # print "-----"
 
-        #FREQUENCY
+        # FREQUENCY
         # frequency(key_players_textdict, output_counter)
         # print "-----"
 
-        #SENTIMENT ANALYSIS
-        # print name
-        # sentiment_analysis(key_players_textdict)
-        # print "------"
+        # SENTIMENT ANALYSIS
+        print name
+        sentiment_analysis(key_players_textdict, keys)
+        nltk_sentiment(key_players_textdict, keys)
 
-        relevant_debates.append(key_players_textdict)
+        # relevant_debates.append(key_players_textdict)
 
-    #TOPIC MODELING
-    df_dict_nolem = setup_agg_df(relevant_debates, keys)
-    df_dict = setup_agg_df_lem(relevant_debates, keys)
+    #SETUP AGG DICTS
+    # df_dict_nolem = setup_agg_df(relevant_debates, keys)
+    # df_dict = setup_agg_df_lem(relevant_debates, keys)
 
     #AGG SUMMARIZER
     # agg_summarizer(df_dict_nolem)
@@ -390,7 +431,7 @@ if __name__ == '__main__':
     #AGG SENTIMENT ANALYSIS
     # print "Polarity and Sentiment for:", candidate
     # agg_sentiment(df_dict_nolem)
-    nltk_sentiment(df_dict_nolem)
+    # agg_nltk_sentiment(df_dict_nolem)
 
     #KMEANS
     # k_means(df_dict, df_dict_nolem, keys, 4)

@@ -29,7 +29,27 @@ def parse_names(key_players):
     'David Muir (ABC News)' : 'MUIR:',
     'Martha Raddatz (ABC News)' : 'RADDATZ:',
     'Mary Katherine Ham' : 'HAM:',
-    'Josh McElveen (WMUR TV)' : 'MCELVEEN:'}
+    'Josh McElveen (WMUR TV)' : 'MCELVEEN:',
+    'Gwen Ifill (PBS)' : 'IFILL:',
+    'Judy Woodruff (PBS)' : 'WOODRUFF:',
+    'John Dickerson (CBS News)' : 'DICKERSON:',
+    'Major Garrett (CBS News)' : 'GARRETT:',
+    'Kimberly Strassel (WSJ)' : 'STRASSEL:',
+    'Maria Bartiromo (Fox Business Network)' : 'BARTIROMO:',
+    'Neil Cavuto (Fox Business Network)' : 'CAVUTO:',
+    'Gerard Baker (WSJ)' : 'BAKER:',
+    'John Harwood (CNBC)' : 'HARWOOD:',
+    'Becky Quick (CNBC)' : 'QUICK:',
+    'Carl Quintanilla (CNBC)' : 'QUINTANILLA:',
+    'Maria Celeste Arraras (Telemundo)' : 'ARRARAS:',
+    'Nancy Cordes (CBS News)' : 'CORDES:',
+    'Kevin Cooney (CBS News)' : 'COONEY:',
+    'Kathie Obradovich (Des Moines)' : 'OBRADOVICH:',
+    'Chuck Todd (MSNBC)' : 'TODD:',
+    'Rachel Maddow (MSNBC)' : 'MADDOW:',
+    'Jorge Ramos (Univision)' : 'RAMOS:',
+    'Maria Elena Salinas (Univision)' : 'SALINAS:',
+    'Karen Tumulty (Washington Post)' : 'TUMULTY:'}
 
     participants = {'Former Secretary of State Hillary Clinton' : 'CLINTON:',
     'Former Governor Martin O\'Malley (MD)': 'O\'MALLEY:',
@@ -45,7 +65,8 @@ def parse_names(key_players):
     'Donald Trump' : 'TRUMP:',
     'Governor Scott Walker (WI)': 'WALKER:',
     'Former Governor Lincoln Chafee (RI)' : 'CHAFEE:',
-    'Former Senator Jim Webb (VA)' : 'WEBB:'}
+    'Former Senator Jim Webb (VA)' : 'WEBB:',
+    'Carly Fiorina':'FIORINA:'}
 
     output_mods = {}
     output_parts = {}
@@ -67,18 +88,46 @@ def parse_names(key_players):
 
 def file_grab(name = 'All'):
     if name == 'D':
-        return {'1st Democratic Debate: October 10th, 2015' : 'data/D_10_13_15.txt','2nd Democratic Debate: January 17th, 2016' : 'data/D_1_17_16.txt','3rd Democratic Debate: April 4th, 2016': 'data/D_4_14_16.txt'}
+        return {'1st Democratic Debate: October 13th, 2015' : 'data/D_10_13_15.txt',
+        '2nd Democratic Debate: November 14th, 2015' : 'data/D_11_14_15.txt',
+        '3rd Democratic Debate: December 19th, 2015' : 'data/D_12_19_15.txt',
+        '4th Democratic Debate: January 17th, 2016' : 'data/D_1_17_16.txt',
+        '5th Democratic Debate: February 4th, 2016': 'data/D_2_4_16.txt',
+        '6th Democratic Debate: February 11th, 2016' : 'data/D_2_11_16.txt',
+        '7th Democratic Debate: March 6th, 2016': 'data/D_3_6_16.txt',
+        '8th Democratic Debate: March 9th, 2016': 'data/D_3_9_16.txt',
+        '9th Democratic Debate: April 4th, 2016': 'data/D_4_14_16.txt'}
+
     elif name == 'R':
-        return {'1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt','2nd Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt','3rd Republican Debate: March 10th, 2016' : 'data/R_3_10_16.txt'}
+        return {'1st Republican Debate: August 6th, 2015' : 'data/R_8_6_15.txt',
+        '2nd Republican Debate: September 16th, 2015' : 'data/R_9_16_15.txt',
+        '3rd Republican Debate: October 28th, 2015' : 'data/R_10_28_15.txt',
+        '4th Republican Debate: November 10th, 2015' : 'data/R_11_10_15.txt',
+        '5th Republican Debate: December 15th, 2015' : 'data/R_12_15_15.txt',
+        '6th Republican Debate: January 14th, 2016' : 'data/R_1_14_16.txt',
+        '7th Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt',
+        '8th Republican Debate: February 13th, 2016' : 'data/R_2_13_16.txt',
+        '9th Republican Debate: February 25th, 2016' : 'data/R_2_25_16.txt',
+        '10th Republican Debate: March 3rd, 2016' : 'data/R_3_3_16.txt',
+        '11th Republican Debate: March 10th, 2016' : 'data/R_3_10_16.txt'}
+
     elif name == 'G':
         return {'1st General Election Debate: September 9th, 2016' : 'data/G_9_26_16.txt'}
+
     elif name == 'R1':
-        return {'2nd Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt'}
+        return {'1st Republican Debate: August 6th, 2015' : 'data/R_8_6_15.txt'}
+
     else:
-        return {'1st Democratic Debate: October 10th, 2015' : 'data/D_10_13_15.txt',
-        '1st Republican Debate: August 8th, 2015' : 'data/R_8_6_15.txt',
-        '2nd Democratic Debate: January 17th, 2016' : 'data/D_1_17_16.txt',
-        '2nd Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt',
-        '3rd Democratic Debate: April 4th, 2016': 'data/D_4_14_16.txt',
-        '3rd Republican Debate: March 10th, 2016' : 'data/R_3_10_16.txt',
-        '1st General Election Debate: September 9th, 2016' : 'data/G_9_26_16.txt'}
+        return {'1st Democratic Debate: October 13th, 2015' : 'data/D_10_13_15.txt',
+        '2nd Democratic Debate: December 19th, 2015' : 'data/D_12_19_15.txt',
+        '3rd Democratic Debate: January 17th, 2016' : 'data/D_1_17_16.txt',
+        '4th Democratic Debate: February 11th, 2016' : 'data/D_2_11_16.txt',
+        '5th Democratic Debate: April 4th, 2016': 'data/D_4_14_16.txt',
+        '1st Republican Debate: August 6th, 2015' : 'data/R_8_6_15.txt',
+        '2nd Republican Debate: November 10th, 2015' : 'data/R_11_10_15.txt',
+        '3rd Republican Debate: December 15th, 2015' : 'data/R_12_15_15.txt',
+        '4th Republican Debate: January 14th, 2016' : 'data/R_1_14_16.txt',
+        '5th Republican Debate: February 6th, 2016' : 'data/R_2_6_16.txt',
+        '6th Republican Debate: February 13th, 2016' : 'data/R_2_13_16.txt',
+        '7th Republican Debate: March 3rd, 2016' : 'data/R_3_3_16.txt',
+        '8th Republican Debate: March 10th, 2016' : 'data/R_3_10_16.txt'}
