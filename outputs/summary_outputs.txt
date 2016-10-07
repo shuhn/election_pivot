@@ -93,29 +93,33 @@ top features for each cluster:
 7: senator, gun, sander, senator sander, new york, york, people, new, nra, voted
 
 TRUMP PRIMARIES:: 4 TOPICS, ngram_range=(1,2)
-0) Make America Great Again "Win Again" Better Deals
-1) Foreign Policy  
-2) Immigration
-3) Domestic Policy (Taxes, Healthcare)
+0) Foreign Policy - Make America Great Again
+1) Law and Order
+2) Trump's Businesses
+3) Jobs / Trade Policy
 
-Counter({0: 30, 1: 21, 2: 13, 3: 11})
+Counter({2: 22, 3: 20, 0: 19, 1: 13})
 top features for each cluster:
-0: country, people, win, law, job, police, trade, million, right, like
-1: deal, think, make, president, israel, want, make deal, way, iran, united state
-2: leader, knock, border, strong, mean, bad, fight, time, medieval, medieval time
-3: care, bid, tax, hillary, beat, health, change, obamacare, line, wedding
+0: deal, make, israel, make deal, united state, united, state, want, way, iran
+1: law, country, used, win, trump, know, fight, people, leader, great
+2: people, year, beat, domain, eminent, eminent domain, said, massive, win, problem
+3: country, china, trade, tax, job, bring, people, win, way, time
 
 
 **SENTIMENT**
 TRUMP PRIMARIES
 Sentiment(polarity=0.1558474633980254, subjectivity=0.518318635796163)
+NLTK API (prob pos): 0.438852505461
 
 TRUMP G
 Sentiment(polarity=0.1308690964538689, subjectivity=0.522318577985768)
+NLTK API (prob pos): 0.416889480147
 
 CLINTON PRIMARIES
 Sentiment(polarity=0.1554673081437431, subjectivity=0.47772320427224724)
+NLTK API (prob pos): 0.510760824824
 
 CLINTON G
 Sentiment(polarity=0.168557660881379, subjectivity=0.4777032594660803)
+NLTK API (prob pos): 0.491802025154
 #maybe result of CLINTON mirroring more of Trump's language?

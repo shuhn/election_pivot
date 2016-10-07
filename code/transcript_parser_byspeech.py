@@ -34,7 +34,7 @@ def setup_buckets(file_name):
             main_text.append(words)
             for word in words:
                 word = word.strip(":")
-                if word.isupper() and len(word) >= 4:
+                if word.isupper() and len(word) > 2:
                     key_players.append(word)
 
     return main_text, set(key_players)
@@ -129,7 +129,7 @@ def lemmitize(text_string):
     tokens = clean_txt.split()
     lowercased = [t.lower() for t in tokens]
     STOPWORDS = stopwords.words('english')
-    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going','say', 'want', 'year']
+    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going', 'say', 'want', 'year', 'inaudible', 'know', 'think', 'later']
     for word in new_stop:
         STOPWORDS.append(word)
     no_stopwords = [w for w in lowercased if not w in STOPWORDS]
@@ -329,11 +329,35 @@ def agg_sentiment(df_dict_nolem):
     textblob = TextBlob(long_string)
     print textblob.sentiment
 
+def nltk_sentiment(df_dict_nolem):
+    import urllib
+
+    output_data = []
+    for array1 in df_dict_nolem[keys[0]].values:
+        long_string = ' '.join(array1)
+        dict_string = {"text" : long_string}
+        data = urllib.urlencode(dict_string)
+        u = urllib.urlopen("http://text-processing.com/api/sentiment/", data)
+        the_page = u.read()
+        output_data.append(the_page)
+
+    pos_prob_list = []
+
+    for point in output_data:
+        negative_prob = float(point[25:41])
+        neu_prob = float(point[55:72])
+        if neu_prob < .5:
+            pos_prob_list.append(1-negative_prob)
+
+    print sum(pos_prob_list) / len(pos_prob_list)
+    print "total length:", len(pos_prob_list)
+
+
 
 if __name__ == '__main__':
     candidate = 'TRUMP:'
     keys = find_key(candidate)
-    all_files = file_grab('R')
+    all_files = file_grab('G')
     relevant_debates = []
     for name, file_name in all_files.iteritems():
         m_t, k_p = setup_buckets(file_name)
@@ -366,6 +390,7 @@ if __name__ == '__main__':
     #AGG SENTIMENT ANALYSIS
     # print "Polarity and Sentiment for:", candidate
     # agg_sentiment(df_dict_nolem)
+    nltk_sentiment(df_dict_nolem)
 
     #KMEANS
     # k_means(df_dict, df_dict_nolem, keys, 4)
