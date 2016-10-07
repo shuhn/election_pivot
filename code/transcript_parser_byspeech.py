@@ -118,6 +118,12 @@ def summarize_speech(key_players_textdict, keys):
     print "-----"
 
 def lemmitize(text_string):
+    """
+    INPUT:
+    - text_string (string)
+    OUTPUT:
+    - list of lemmitized words (list)
+    """
     regex = re.compile('<.+?>|[^a-zA-Z]')
     clean_txt = regex.sub(' ', text_string)
     tokens = clean_txt.split()
@@ -132,6 +138,15 @@ def lemmitize(text_string):
     return [w for w in lemmed if w]
 
 def setup_agg_df_lem(relevant_debates, keys):
+    """
+    INPUT:
+    - relevant_debates (list): list of dictionaries, each dictionary has a key (candidate) : value (list of words) pair
+    - keys (tuple): tuple that identifies the candidate to analyze (TRUMP:) or (CLINTON:)
+    OUTPUT:
+    - dictionary | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
+
+    **Lemitized Version**
+    """
     #aggregate dictionaries
     aggregate_dict = {}
     for d in relevant_debates:
@@ -159,6 +174,13 @@ def setup_agg_df_lem(relevant_debates, keys):
     return df_dict
 
 def setup_agg_df(relevant_debates, keys):
+    """
+    INPUT:
+    - relevant_debates (list): list of dictionaries, each dictionary has a key (candidate) : value (list of words) pair
+    - keys (tuple): tuple that identifies the candidate to analyze (TRUMP:) or (CLINTON:)
+    OUTPUT:
+    - df_dict (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
+    """
     #aggregate dictionaries
     aggregate_dict = {}
     for d in relevant_debates:
@@ -182,15 +204,23 @@ def setup_agg_df(relevant_debates, keys):
 
     return df_dict
 
-def k_means(df_dict, df_dict_nolem, keys):
-
+def k_means(df_dict, df_dict_nolem, keys, n_clusters_):
+    """
+    INPUT:
+    - df_dict (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
+    - df_dict_nolem (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = non-lemitized speeches)
+    - keys (tuple): tuple that identifies the candidate to analyze (TRUMP:) or (CLINTON:)
+    - n_clusters_ (int): number of clusters to use in k-means
+    OUTPUT:
+    - print top features for each cluster, and 3 random speeches from each cluster
+    """
     df = df_dict[keys[0]]
     df_nolem = df_dict_nolem[keys[0]]
 
     vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
     X = vectorizer.fit_transform(df[keys[1]])
     features = vectorizer.get_feature_names()
-    kmeans = KMeans(n_clusters=4)
+    kmeans = KMeans(n_clusters=n_clusters_)
     kmeans.fit(X)
 
     #LOOK INTO CLASS BALANCES
@@ -223,6 +253,14 @@ def k_means(df_dict, df_dict_nolem, keys):
     pd.reset_option('display.max_colwidth')
 
 def hierarch_clust(df_dict, keys):
+    """
+    INPUT:
+    - df_dict (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
+    - keys (tuple): tuple that identifies the candidate to analyze (TRUMP:) or (CLINTON:)
+    OUTPUT:
+    - reveals dendrogram
+    """
+
     df_small = df_dict[keys[0]]
 
     # first vectorize...
@@ -247,6 +285,12 @@ def hierarch_clust(df_dict, keys):
     plt.show()
 
 def find_key(candidate):
+    """
+    INPUT:
+    - candidate (string): 'CLINTON:' or 'TRUMP:'
+    OUTPUT:
+    - keys (tuple): tuple that identifies the candidate to analyze
+    """
     if candidate == 'CLINTON:':
         return 'C', 'CLINTON:'
     elif candidate == 'TRUMP:':
@@ -256,6 +300,13 @@ def find_key(candidate):
         exit()
 
 def agg_summarizer(df_dict_nolem):
+    """
+    INPUT:
+    - df_dict_nolem (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
+    OUTPUT:
+    - prints 300 word summary for key candidate
+    **non-lemitized DF**
+    """
     long_string = []
     for array1 in df_dict_nolem[keys[0]].values:
         long_string.append(' '.join(array1))
@@ -264,6 +315,13 @@ def agg_summarizer(df_dict_nolem):
     print summarizer.summarize(long_string, words = 300)
 
 def agg_sentiment(df_dict_nolem):
+    """
+    INPUT:
+    - df_dict_nolem (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
+    OUTPUT:
+    - print sentiment and polarity of given candidate
+    **non-lemitized DF**
+    """
     long_string = []
     for array1 in df_dict_nolem[keys[0]].values:
         long_string.append(' '.join(array1))
@@ -306,10 +364,11 @@ if __name__ == '__main__':
     # agg_summarizer(df_dict_nolem)
 
     #AGG SENTIMENT ANALYSIS
+    # print "Polarity and Sentiment for:", candidate
     # agg_sentiment(df_dict_nolem)
 
     #KMEANS
-    k_means(df_dict, df_dict_nolem, keys)
+    # k_means(df_dict, df_dict_nolem, keys, 4)
 
     #HIER_ARCH
     # hierarch_clust(df_dict, keys)
