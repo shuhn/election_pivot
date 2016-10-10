@@ -1,6 +1,38 @@
+#Priorities
+1) Slide OUTLINE
+2) Slide Assets
+3) GitHub Repo / Article
+4) Presentation (should be a selection of the article)
+
+#SLIDE OUTLINE
+
+Assets to Create:
+Q1: Line graph, mean difference by debate over time
+- also plot mean of mean difference
+- track with polling numbers ?
+
+Knowing who ruled over each debate is interesting, but can we find how the candidates really feel about certain current topics?
+
+Q2: Line graph, sentiment over time
+- plot mean sentiment as well, annotated with key events  
+
+Sentiment Analysis does give us some insight on the debaters frame of mind. However, for the people who were not able to watch the debates, is it possible to summarize what was really said in an unbiased way?
+
+Q3: Side by side summaries (slide 1), blur out unimportant areas, highlight important areas (slide 2)
+
+The core messages of each candidate seems to be properly convened by these summaries. Is it possible to dive deeper and discover what each one really talked about?
+
+Q4: Topics
+1) Hierarchical clustering dendrogram
+
+2) 4 quadrants, first half, second half, convention speech, GE
+Somehow have the circles grow / evolve with time ? Multiple slides to show progression?
+
+Further research questions.
+
 **Frequency**
 *Republican*
-#Maybe track this with poll numbers?
+###Maybe track this with poll numbers?
 1st Republican Debate: August 6th, 2015
 TRUMP: 0.15
 PAUL: 0.06
@@ -149,62 +181,14 @@ CLINTON: -0.03
 SANDERS: 0.02
 CLINTON: -0.02
 
-**SUMMARIES (300 WORDS)**
-TRUMP:
-I say not in a braggadocious way, I've made billions and billions of dollars dealing with people all over the world, and I want to put whatever that talent is to work for this country so we have great trade deals, we make our country rich again, we make it great again.
-Many of the great business people that you know and Carl Icon (ph) is going to work with me on making great deals for this country.
-...I will know more about the problems of this world by the time I sit, and you look at what's going in this world right now by people that supposedly know, this world is a mess.
-We have people that know what is going on.
-I've gained great respect for many and I'm going to even say I mean, in different forms for the people on the dais, in different forms.
-But one thing I'm also going to do, I'm going to be getting bringing a lot of people in who are Democrats, who are independents, and you're seeing that with the polls, because if you look at anywhere, look at any of the elections, every single election, it has been record-setting.
-I will not we're going to have private we are going to have health care, but I will not allow people to die on the sidewalks and the streets of our country if I'm president.
-And what a lot of people don't know because they were all saying, oh, you're going to take their property.
-And I think after 50 years, and I have many friends, I own many properties in Miami, many, many, and I have many people that know and they feel exactly the way I do, make a deal, it would be great, but it's got to be a great deal for the United States, not a bad deal for the United States.
+*GE*
+1st General Election Debate: September 26th, 2016
+TRUMP: 0.09
+CLINTON: -0.09
 
-CLINTON:
-And, you know, I do think it's important to do exactly what Senator Sanders said, and that is to start talking about the issues that the American people really care about, and that they talk to each of us about.
-I've heard a lot about me in this debate, and I'm going to keep talking and thinking about all of you because ultimately, I think the president's job is to do everything possible, everything that she can do to lift up the people of this country.
-So if -- if people who are in the private sector know what I stand for, it's what I fought for as a senator, it's what I will do as president, and they want to be part of once again building our economy so it works for everybody, more power to them, because they are the kind of business leaders who understand that if we don't get the American economy moving and growing, we're not going to recognize our country and we're not going to give our kids the same opportunities that we had.
-So I see as president having a constant dialogue with Americans here's what we're trying to get done, here's why I need your help, here's why you may think comprehensive immigration reform with a path to citizenship isn't something you care about, but I'm telling you it will help fix the labor market, it will bring people out of the shadows   Well, I'm certainly going to unite the party, but I'm notI'm not getting ahead of myself.
-Between the Republicans trying to repeal the first chance we've ever had to get to universal health care, and Senator Sanders wanting to throw us into a contentious debate over single-payer, I think the smart approach is build on and protect the Affordable Care Act. Make it work.
-
-
-**Clustering**
-
-CLINTON PRIMARIES:: 8 TOPICS, ngram_range=(1,3)
-0) Financial Regulation
-1) Health Care
-2) Education
-3) Gun Control
-4) Immigration
-5) Foreign Policy
-6) Law Enforcement
-7) Jobs / Opportunity
-
-Counter({5: 64, 0: 62, 7: 60, 4: 52, 2: 44, 3: 30, 1: 29, 6: 29})
-top features for each cluster:
-0: street, wall street, wall, president, obama, frank, president obama, dodd frank, dodd, company
-1: care, health, affordable, health care, affordable care, affordable care act, care act, cost, act, coverage
-2: debt, tax, college, raise, pay, american, family, right, middle class, class
-3: gun, immunity, nra, voted, seller, got, country, maker, absolute immunity, absolute
-4: comprehensive, president, reform, immigration, comprehensive immigration, comprehensive immigration reform, immigration reform, criminal, work, justice
-5: state, support, united, security, isi, try, united state, president, syria, threat
-6: child, process, law, story, index, like, young, law enforcement, enforcement, heard
-7: barrier, way, work, stand, got, time, president, american, job, america
-
-TRUMP PRIMARIES:: 4 TOPICS, ngram_range=(1,3)
-0) Foreign Policy
-1) Make America Great Again - Trade Policy / Jobs
-2) Immigration
-3) Hillary's Record
-
-Counter({1: 125, 2: 117, 0: 58, 3: 18})
-top features for each cluster:
-0: oil, look, used, isi, knock, mean, country, thing, money, world
-1: win, deal, company, ok, way, year, number, guy, china, right
-2: country, deal, great, wall, problem, job, border, leader, president, talking
-3: beat, hillary, clinton, hillary clinton, poll, beat hillary, beat hillary clinton, million, vote, win
-
+2nd General Election Debate: October 9th, 2016
+TRUMP: 0.11
+CLINTON: -0.11
 
 **SENTIMENT**
 TRUMP PRIMARIES
@@ -213,11 +197,11 @@ Sentiment(polarity=0.1457374323829649, subjectivity=0.5115024421623825)
 NLTK Prob of Positive: 0.428836133066
 total length: 474
 
-TRUMP G
+TRUMP GE
 Polarity and Sentiment for: TRUMP:
-Sentiment(polarity=0.1308690964538689, subjectivity=0.522318577985768)
-NLTK Prob of Positive:  0.416889480147
-total length: 66
+Sentiment(polarity=0.12016056799793817, subjectivity=0.5244690202627055)
+NLTK Prob of Positive:  0.411885644154
+total length: 114
 
 CLINTON PRIMARIES
 Polarity and Sentiment for: CLINTON:
@@ -225,13 +209,13 @@ Sentiment(polarity=0.15619613021437437, subjectivity=0.47152382115063873)
 NLTK Prob of Positive:  0.510442829001
 total length: 307
 
-CLINTON G
+CLINTON GE
 Polarity and Sentiment for: CLINTON:
-Sentiment(polarity=0.168557660881379, subjectivity=0.4777032594660803)
-NLTK Prob of Positive:  0.491802025154
-total length: 52
+Sentiment(polarity=0.16199217889435266, subjectivity=0.48304578337187)
+NLTK Prob of Positive:  0.489079012186
+total length: 87
 
-#maybe result of CLINTON mirroring more of Trump's language?
+###maybe result of CLINTON mirroring more of Trump's language?
 
 *Sentiment by Debate*
 1st Republican Debate: August 6th, 2015
@@ -289,7 +273,119 @@ TRUMP: Sentiment(polarity=0.12941285841696507, subjectivity=0.5332452124649246)
 NLTK Prob of Positive:  0.537386354502
 total length: 1
 
-#all Clinton Debates are ambiguous, only significant when judged on aggregate basis
+###all Clinton Debates are ambiguous, only significant when judged on aggregate basis
+
+**SUMMARIES (300 WORDS)**
+*TRUMP:*
+### Primaries
+I say not in a braggadocious way, I've made billions and billions of dollars dealing with people all over the world, and I want to put whatever that talent is to work for this country so we have great trade deals, we make our country rich again, we make it great again.
+Many of the great business people that you know and Carl Icon (ph) is going to work with me on making great deals for this country.
+...I will know more about the problems of this world by the time I sit, and you look at what's going in this world right now by people that supposedly know, this world is a mess.
+We have people that know what is going on.
+I've gained great respect for many and I'm going to even say I mean, in different forms for the people on the dais, in different forms.
+But one thing I'm also going to do, I'm going to be getting bringing a lot of people in who are Democrats, who are independents, and you're seeing that with the polls, because if you look at anywhere, look at any of the elections, every single election, it has been record-setting.
+I will not we're going to have private we are going to have health care, but I will not allow people to die on the sidewalks and the streets of our country if I'm president.
+And what a lot of people don't know because they were all saying, oh, you're going to take their property.
+And I think after 50 years, and I have many friends, I own many properties in Miami, many, many, and I have many people that know and they feel exactly the way I do, make a deal, it would be great, but it's got to be a great deal for the United States, not a bad deal for the United States.
+
+### GE
+When I watch the deals being made, when I watch what's happening with some horrible things like Obamacare, where your health insurance and health care is going up by numbers that are astronomical, 68 percent, 59 percent, 71 percent, when I look at the Iran deal and how bad a deal it is for us, it's a one-sided transaction where we're giving back $150 billion to a terrorist state, really, the number one terror state, we've made them a strong country from really a very weak country just three years ago.
+And I will tell you that when Hillary brings up a point like that and she talks about words that I said 11 years ago, I think it's disgraceful, and I think she should be ashamed of herself, if you want to know the truth.
+But I don't want to have, with all the problems this country has and all of the problems that you see going on, hundreds of thousands of people coming in from Syria when we know nothing about them.
+And I will tell you very strongly, when Bernie Sanders said she had bad judgment, she has really bad judgment, because we are letting people into this country that are going to cause problems and crime like you've never seen.
+And when these people are going to put billions and billions of dollars into companies, and when they're going to bring $2.5 trillion back from overseas, where they can't bring the money back, because politicians like Secretary Clinton won't allow them to bring the money back, because the taxes are so onerous, and the bureaucratic red tape, so what is so bad.
+Our country is suffering because people like Secretary Clinton have made such bad decisions in terms of our jobs and in terms of what's going on.
+
+*CLINTON:*
+### Primaries
+And, you know, I do think it's important to do exactly what Senator Sanders said, and that is to start talking about the issues that the American people really care about, and that they talk to each of us about.
+I've heard a lot about me in this debate, and I'm going to keep talking and thinking about all of you because ultimately, I think the president's job is to do everything possible, everything that she can do to lift up the people of this country.
+So if -- if people who are in the private sector know what I stand for, it's what I fought for as a senator, it's what I will do as president, and they want to be part of once again building our economy so it works for everybody, more power to them, because they are the kind of business leaders who understand that if we don't get the American economy moving and growing, we're not going to recognize our country and we're not going to give our kids the same opportunities that we had.
+So I see as president having a constant dialogue with Americans here's what we're trying to get done, here's why I need your help, here's why you may think comprehensive immigration reform with a path to citizenship isn't something you care about, but I'm telling you it will help fix the labor market, it will bring people out of the shadows   Well, I'm certainly going to unite the party, but I'm notI'm not getting ahead of myself.
+Between the Republicans trying to repeal the first chance we've ever had to get to universal health care, and Senator Sanders wanting to throw us into a contentious debate over single-payer, I think the smart approach is build on and protect the Affordable Care Act. Make it work.
+
+### GE
+Yes, I think that that's a very good question, because I've heard from lots of teachers and parents about some of their concerns about some of the things that are being said and done in this campaign.
+But it is important for us as a policy, you know, not to say, as Donald has said, we're going to ban people based on a religion.
+And I think when you look at the letters that I get, a lot of people are worried that maybe they wouldn't have a place in Donald Trump's America.
+I want to appoint Supreme Court justices who understand the way the world really works, who have real-life experience, who have not just been in a big law firm and maybe clerked for a judge and then gotten on the bench, but, you know, maybe they tried some more cases, they actually understand what people are up against.
+Independent experts have looked at what I've proposed and looked at what Donald's proposed, and basically they've said this, that if his tax plan, which would blow up the debt by over $5 trillion and would in some instances disadvantage middle-class families compared to the wealthy, were to go into effect, we would lose 3.5 million jobs and maybe have another recession.
+Or maybe he doesn't want the American people, all of you watching tonight, to know that he's paid nothing in federal taxes, because the only years that anybody's ever seen were a couple of years when he had to turn them over to state authorities when he was trying to get a casino license, and they showed he didn't pay any federal income tax.
+But I want toon behalf of myself, and I think on behalf of a majority of the American people, say that, you know, our word is good.
+
+
+**Clustering**
+*CLINTON*
+PRIMARIES:: 8 TOPICS, ngram_range=(1,3)
+0) Financial Regulation
+1) Health Care
+2) Education
+3) Gun Control
+4) Immigration
+5) Foreign Policy
+6) Law Enforcement
+7) Jobs / Opportunity
+
+Counter({5: 64, 0: 62, 7: 60, 4: 52, 2: 44, 3: 30, 1: 29, 6: 29})
+top features for each cluster:
+0: street, wall street, wall, president, obama, frank, president obama, dodd frank, dodd, company
+1: care, health, affordable, health care, affordable care, affordable care act, care act, cost, act, coverage
+2: debt, tax, college, raise, pay, american, family, right, middle class, class
+3: gun, immunity, nra, voted, seller, got, country, maker, absolute immunity, absolute
+4: comprehensive, president, reform, immigration, comprehensive immigration, comprehensive immigration reform, immigration reform, criminal, work, justice
+5: state, support, united, security, isi, try, united state, president, syria, threat
+6: child, process, law, story, index, like, young, law enforcement, enforcement, heard
+7: barrier, way, work, stand, got, time, president, american, job, america
+
+GE:: 8 TOPICS, ngram_range=(1,1)
+0) Financial Regulation
+1) Foreign Policy
+2) Law Enforcement
+3) Health Care
+4) Jobs / Opportunity
+5) Fact Checking
+6) Donald's Record
+7) Supreme Court
+
+Counter({6: 14, 0: 13, 3: 12, 7: 11, 2: 9, 5: 7, 1: 5, 4: 3})
+top features for each cluster:
+0: tax, economy, job, debt, plan, trillion, wealthy, million, middle, energy
+1: nuclear, weapon, isi, iran, russia, got, state, effort, number, nation
+2: police, community, american, thing, gun, force, use, sure, support, problem
+3: insurance, health, care, republican, job, worked, work, company, year, mayor
+4: business, government, taken, installers, pay, transfer, bad, happened, direct, skill
+5: fact, proposed, com, hillaryclinton, checker, look, hope, checking, happen, time
+6: donald, woman, debate, muslim, tonight, campaign, country, thinki, america, heard
+7: election, court, supreme, tax, return, maybe, classified, trying, important, zero
+
+*TRUMP*
+PRIMARIES:: 4 TOPICS, ngram_range=(1,3)
+0) Foreign Policy
+1) Make America Great Again - Trade Policy / Jobs
+2) Immigration
+3) Hillary's Record
+
+Counter({1: 125, 2: 117, 0: 58, 3: 18})
+top features for each cluster:
+0: oil, look, used, isi, knock, mean, country, thing, money, world
+1: win, deal, company, ok, way, year, number, guy, china, right
+2: country, deal, great, wall, problem, job, border, leader, president, talking
+3: beat, hillary, clinton, hillary clinton, poll, beat hillary, beat hillary clinton, million, vote, win
+
+GE:: 4 TOPICS, ngram_range=(1,2)
+0) Taxes / Regulation
+1) Make America Great Again
+2) Foreign Policy
+3) Law and Order / Crime / Inner Cities
+
+Counter({1: 63, 0: 14, 2: 11, 3: 10})
+top features for each cluster:
+0: tax, donor, mail, morning, clock morning, clock, release, regulation, care, gone
+1: country, bad, hillary, deal, company, look, job, money, clinton, thing
+2: isi, website, look, syria, fight, killing isi, russia, killing, defeat, wonder
+3: city, inner, law, inner city, african, african american, american, order, law order, politician
 
 **Questions for Future Research**
 - How similar are VP to their leaders? Mirror language?
+- How do these trends compare to past elections?
+- How do these topics compare to other main speeches? Stump speeches? DNC / RNC?

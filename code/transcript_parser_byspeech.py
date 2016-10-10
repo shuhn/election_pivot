@@ -15,7 +15,7 @@ from scipy.spatial.distance import pdist, squareform
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage, dendrogram
 from nltk.stem import WordNetLemmatizer
-from collections import Counter
+from collections import Counter, OrderedDict
 from sklearn.decomposition import PCA
 
 def setup_buckets(file_name):
@@ -88,7 +88,7 @@ def frequency(key_players_textdict, output_counter):
     avg_percent_intervention = sum(interventiion_list) / float(len(interventiion_list))
 
     sorted_x = sorted(output_counter.items(), key=operator.itemgetter(1), reverse = True)
-    print name
+
     for tuple1 in sorted_x:
         print tuple1[0], round(float(tuple1[1]) - avg_percent_intervention, 2)
     print ""
@@ -103,7 +103,7 @@ def sentiment_analysis(key_players_textdict, keys):
     list_words = key_players_textdict[keys[1]]
     string_words = (' '.join(list_words))
     textblob = TextBlob(string_words)
-    print candidate, textblob.sentiment
+    print textblob.sentiment
 
 def nltk_sentiment(key_players_textdict, keys):
     """
@@ -132,17 +132,15 @@ def nltk_sentiment(key_players_textdict, keys):
         #as long as neutral prob isn't > .5
         output_data.append(1-output_list[0])
 
-    print output_list
-
-    # try:
-    #     prob_positive = sum(output_data) / len(output_data)
-    # except ZeroDivisionError:
-    #     prob_positive = 'Neutral'
-    # print "NLTK Prob of Positive: ", prob_positive
-    # print "total length:", len(output_data)
+    try:
+        prob_positive = sum(output_data) / len(output_data)
+    except ZeroDivisionError:
+        prob_positive = 'Neutral'
+    print "NLTK Prob of Positive: ", prob_positive
+    print "Number of Speeches Included::", len(output_data)
     print ''
 
-def summarize_speech(key_players_textdict, keys):
+def summarize_speech(key_players_textdict, keys, words):
     """
     INPUT:
     - key_players_textdict (dict) | candidate_name (string) : all words spoken (list)
@@ -151,9 +149,10 @@ def summarize_speech(key_players_textdict, keys):
     - prints 200 word summary for key candidate
     """
     list_words = key_players_textdict[keys[1]]
+    STOPWORDS = ['STOP']
+    list_words = [w for w in list_words if not w in STOPWORDS]
     string_words = (' '.join(list_words))
-    print candidate
-    print summarizer.summarize(string_words, words = 200)
+    print summarizer.summarize(string_words, words = words)
     print "-----"
 
 def lemmitize(text_string):
@@ -168,7 +167,7 @@ def lemmitize(text_string):
     tokens = clean_txt.split()
     lowercased = [t.lower() for t in tokens]
     STOPWORDS = stopwords.words('english')
-    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going', 'say', 'want', 'year', 'inaudible', 'know', 'think', 'later', 'thing', 'york', 'new', 'said', 'people', 'cnn', 'jeb', 'florida', 'able', 'unidentifiable', 'need', 'ted', 'trump', 'ben', 'senator', 'sanders', 'make', 'flint', 'question', 'tell', 'come', 'like']
+    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going', 'say', 'want', 'year', 'inaudible', 'know', 'think', 'later', 'thing', 'york', 'new', 'said', 'people', 'cnn', 'jeb', 'florida', 'able', 'unidentifiable', 'need', 'ted', 'trump', 'ben', 'senator', 'sanders', 'make', 'flint', 'question', 'tell', 'come', 'like', 'wait', 'year']
     for word in new_stop:
         STOPWORDS.append(word)
     no_stopwords = [w for w in lowercased if not w in STOPWORDS]
@@ -183,7 +182,6 @@ def setup_agg_df_lem(relevant_debates, keys):
     - keys (tuple): tuple that identifies the candidate to analyze (TRUMP:) or (CLINTON:)
     OUTPUT:
     - dictionary | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
-
     **Lemitized Version**
     """
     #aggregate dictionaries
@@ -256,7 +254,7 @@ def k_means(df_dict, df_dict_nolem, keys, n_clusters_):
     df = df_dict[keys[0]]
     df_nolem = df_dict_nolem[keys[0]]
 
-    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
+    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,1))
     X = vectorizer.fit_transform(df[keys[1]])
 
     #PCA
@@ -308,7 +306,7 @@ def hierarch_clust(df_dict, keys):
     df_small = df_dict[keys[0]]
 
     # first vectorize...
-    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,3))
+    vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,1))
     small_X = vectorizer.fit_transform(df_small[keys[1]])
     small_features = vectorizer.get_feature_names()
 
@@ -343,7 +341,7 @@ def find_key(candidate):
         print "Sorry, we don't recognize that candidate name."
         exit()
 
-def agg_summarizer(df_dict_nolem):
+def agg_summarizer(df_dict_nolem, keys, words):
     """
     INPUT:
     - df_dict_nolem (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
@@ -356,9 +354,9 @@ def agg_summarizer(df_dict_nolem):
         long_string.append(' '.join(array1))
 
     long_string = ' '.join(long_string)
-    print summarizer.summarize(long_string, words = 300)
+    print summarizer.summarize(long_string, words = words)
 
-def agg_sentiment(df_dict_nolem):
+def agg_sentiment(df_dict_nolem, keys):
     """
     INPUT:
     - df_dict_nolem (dictionary) | key ('C' or 'T' based on keys) : value (dataframe, column = full candidate name, rows = speeches)
@@ -373,8 +371,10 @@ def agg_sentiment(df_dict_nolem):
     textblob = TextBlob(long_string)
     print textblob.sentiment
 
-def agg_nltk_sentiment(df_dict_nolem):
+def agg_nltk_sentiment(df_dict_nolem, keys):
     output_data = []
+    sent_speech_dict = {}
+
     for array1 in df_dict_nolem[keys[0]].values:
         long_string = ' '.join(array1)
         dict_string = {"text" : long_string}
@@ -388,53 +388,144 @@ def agg_nltk_sentiment(df_dict_nolem):
         for string1 in imp_items:
             output_list.append(float(string1.split(',')[0]))
 
+        sent_speech_dict[float(string1.split(',')[0])] = long_string
+
         if output_list[1] < .5:
             #as long as neutral prob isn't > .5
             output_data.append(1-output_list[0])
 
     print "NLTK Prob of Positive: ", sum(output_data) / len(output_data)
-    print "total length:", len(output_data)
+    print "Number of Speeches Included::", len(output_data)
 
-if __name__ == '__main__':
-    candidate = 'TRUMP:'
+    #EXPLORATORY WORK
+    # top_5 = OrderedDict(sorted(sent_speech_dict.items()))
+    #
+    # counter = 0
+    # for key, value in top_5.iteritems():
+    #     if counter < 5:
+    #         print key, value
+    #     counter += 1
+
+def main():
+    menu1 = """Has there been a General Election pivot? Let's explore.
+
+    ******************************************************
+
+    Would you like to look at Clinton (C) or Trump (T)? """
+
+    menu2 = """Would you like to look at the primaries (P) or the general election (GE)? """
+
+    menu3 = """MENU - Please enter the number of your choice.
+
+    Debate by Debate Analysis:
+    1) Summaries
+    2) Frequency
+    3) Sentiment
+
+    Aggregate Analysis:
+    4) Summaries
+    5) Sentiment
+    6) K-Means
+    7) Hierarchical Clustering
+
+
+    >>  """
+
+    choice1 = raw_input(menu1)
+    if choice1 == 'C':
+        choice1 = 'CLINTON:'
+    elif choice1 == 'T':
+        choice1 = 'TRUMP:'
+    else:
+        print 'Invalid input, options are \'C\' or \'T\'. Exiting now.'
+        exit()
+    choice2 = raw_input(menu2)
+    if choice2 == 'P' and choice1 == 'CLINTON:':
+        choice2 = 'D'
+    elif choice2 == 'P' and choice1 == 'TRUMP:':
+        choice2 = 'R'
+    elif choice2 == 'GE':
+        choice2 = 'G'
+    else:
+        print 'Invalid input, options are \'P\' or \'GE\'. Exiting now.'
+        exit()
+    choice3 = raw_input(menu3)
+    try:
+        choice3 = int(choice3)
+    except ValueError:
+        print 'Invalid input, you may enter a number 1-7. Exiting now.'
+    if choice3 < 1 or choice3 > 7:
+        print 'Invalid input, you may enter a number 1-7. Exiting now.'
+
+    if choice3 == 1 or choice3 == 4:
+        choice5 = int(raw_input("    How many words would you like?\n    >>  "))
+    if choice3 == 6:
+        choice4 = int(raw_input("    How many clusters would you like?\n    >>  "))
+
+    print "\nOkay, starting now...\n"
+
+    candidate = choice1
     keys = find_key(candidate)
-    chosen_debates = file_grab('R')
+    chosen_debates = file_grab(choice2)
     relevant_debates = []
     for name, file_name in chosen_debates.iteritems():
         m_t, k_p = setup_buckets(file_name)
         mods, parts, key_players, output_counter = parse_names(k_p)
         key_players_textdict, output_counter = parse_text(m_t, key_players, output_counter)
 
-        #SUMMARIES
-        # print name
-        # summarize_speech(key_players_textdict, keys)
-        # print "-----"
+        if choice3 == 1:
+            #SUMMARIES
+            print name
+            summarize_speech(key_players_textdict, keys, choice5)
 
-        # FREQUENCY
-        # frequency(key_players_textdict, output_counter)
-        # print "-----"
+        if choice3 == 2:
+            # FREQUENCY
+            print name
+            frequency(key_players_textdict, output_counter)
+            print "-----"
 
-        # SENTIMENT ANALYSIS
-        print name
-        sentiment_analysis(key_players_textdict, keys)
-        nltk_sentiment(key_players_textdict, keys)
+        if choice3 == 3:
+            # SENTIMENT ANALYSIS
+            print name
+            sentiment_analysis(key_players_textdict, keys)
+            nltk_sentiment(key_players_textdict, keys)
 
-        # relevant_debates.append(key_players_textdict)
+        relevant_debates.append(key_players_textdict)
+
+    if choice3 < 4:
+        print "Complete. Exiting now."
+        exit()
 
     #SETUP AGG DICTS
-    # df_dict_nolem = setup_agg_df(relevant_debates, keys)
-    # df_dict = setup_agg_df_lem(relevant_debates, keys)
+    df_dict_nolem = setup_agg_df(relevant_debates, keys)
+    df_dict = setup_agg_df_lem(relevant_debates, keys)
 
-    #AGG SUMMARIZER
-    # agg_summarizer(df_dict_nolem)
+    print "Set-up complete..."
 
-    #AGG SENTIMENT ANALYSIS
-    # print "Polarity and Sentiment for:", candidate
-    # agg_sentiment(df_dict_nolem)
-    # agg_nltk_sentiment(df_dict_nolem)
+    if choice3 == 4:
+        #AGG SUMMARIZER
+        print "Starting aggregate summarizer...\n"
+        print choice5, "word summary for", keys[1]
+        agg_summarizer(df_dict_nolem, keys, choice5)
 
-    #KMEANS
-    # k_means(df_dict, df_dict_nolem, keys, 4)
+    if choice3 == 5:
+        #AGG SENTIMENT ANALYSIS
+        print "Starting aggregate sentiment analysis...\n"
+        print "Polarity and Sentiment for:", candidate
+        agg_sentiment(df_dict_nolem, keys)
+        agg_nltk_sentiment(df_dict_nolem, keys)
 
-    #HIER_ARCH
-    # hierarch_clust(df_dict, keys)
+    if choice3 == 6:
+        #KMEANS
+        print "Starting aggregate k-means analysis...\n"
+        k_means(df_dict, df_dict_nolem, keys, choice4)
+
+    if choice3 == 7:
+        #HIER_ARCH
+        print "Starting hierarchical clustering...\n"
+        hierarch_clust(df_dict, keys)
+
+    print "\nComplete. Exiting now.\n"
+
+if __name__ == '__main__':
+    main()
