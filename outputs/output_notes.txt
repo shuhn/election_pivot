@@ -389,3 +389,28 @@ top features for each cluster:
 - How similar are VP to their leaders? Mirror language?
 - How do these trends compare to past elections?
 - How do these topics compare to other main speeches? Stump speeches? DNC / RNC?
+
+
+
+
+
+
+
+
+------------
+
+
+
+
+trump_p = [.23, .27, .26, .34, .39, .33, .37, .34, .36, .30, .53]
+#1: http://www.businessinsider.com/poll-donald-trump-leads-debate-2015-8
+#2: http://www.cbsnews.com/news/new-poll-donald-trump-still-leads-but-ben-carson-makes-strong-gains/
+#3: http://www.cnn.com/2015/10/27/politics/ben-carson-donald-trump-cbs-poll/
+#4: https://www.yahoo.com/news/trump-surges-among-likely-republican-primary-voters-reuters-213521679.html?ref=gs
+#5: http://www.foxnews.com/politics/2015/12/19/fox-news-poll-trump-jumps-cruz-climbs-carson-sinks-in-gop-race.html
+#6: http://www.wsj.com/articles/poll-donald-trump-widens-his-lead-in-republican-presidential-race-1452808842
+#7: http://heavy.com/news/2016/02/south-carolina-gop-republican-primary-polls-polling-trump-cruz-bush-rubio/
+#8: http://www.cnn.com/2016/02/18/politics/south-carolina-gop-polling-snapshot/
+#9: http://www.rasmussenreports.com/public_content/politics/elections/election_2016/trump_s_lead_grows_with_jeb_out_of_the_race
+#10: http://www.msnbc.com/rachel-maddow-show/latest-polls-reinforce-republican-partys-challenges
+#11: https://today.yougov.com/news/2016/03/14/trump-rises-national-support-rubio-falls-and-carso/
