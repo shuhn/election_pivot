@@ -6,6 +6,10 @@
 
 #SLIDE OUTLINE
 
+Intro Slide
+- What data I'm working with
+- List relevant debates
+
 Assets to Create:
 Q1: Line graph, mean difference by debate over time
 - also plot mean of mean difference
@@ -275,6 +279,51 @@ total length: 1
 
 ###all Clinton Debates are ambiguous, only significant when judged on aggregate basis
 
+1st Democratic Debate: October 13th, 2015
+Sentiment(polarity=0.14994547155033092, subjectivity=0.46059628777020056)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+2nd Democratic Debate: November 14th, 2015
+Sentiment(polarity=0.11468063601445527, subjectivity=0.47338681483725237)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+3rd Democratic Debate: December 19th, 2015
+Sentiment(polarity=0.15451631112459144, subjectivity=0.4807746941664143)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+4th Democratic Debate: January 17th, 2016
+Sentiment(polarity=0.1318698203441406, subjectivity=0.4749779081274548)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+5th Democratic Debate: February 4th, 2016
+Sentiment(polarity=0.16282862222344258, subjectivity=0.44011139025409635)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+6th Democratic Debate: February 11th, 2016
+Sentiment(polarity=0.14913890206314456, subjectivity=0.4823833091711884)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+7th Democratic Debate: March 6th, 2016
+Sentiment(polarity=0.16696063664957686, subjectivity=0.45566066422057183)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+8th Democratic Debate: March 9th, 2016
+Sentiment(polarity=0.18132568323457698, subjectivity=0.4796623423575702)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
+9th Democratic Debate: April 4th, 2016
+Sentiment(polarity=0.17545657217935845, subjectivity=0.49027941513181333)
+NLTK Prob of Positive:  Neutral
+Number of Speeches Included:: 0
+
 **SUMMARIES (300 WORDS)**
 *TRUMP:*
 ### Primaries
@@ -304,6 +353,12 @@ So if -- if people who are in the private sector know what I stand for, it's wha
 So I see as president having a constant dialogue with Americans here's what we're trying to get done, here's why I need your help, here's why you may think comprehensive immigration reform with a path to citizenship isn't something you care about, but I'm telling you it will help fix the labor market, it will bring people out of the shadows   Well, I'm certainly going to unite the party, but I'm notI'm not getting ahead of myself.
 Between the Republicans trying to repeal the first chance we've ever had to get to universal health care, and Senator Sanders wanting to throw us into a contentious debate over single-payer, I think the smart approach is build on and protect the Affordable Care Act. Make it work.
 
+*Small*
+I've heard a lot about me in this debate, and I'm going to keep talking and thinking about all of you because ultimately, I think the president's job is to do everything possible, everything that she can do to lift up the people of this country. So if -- if people who are in the private sector know what I stand for, it's what I fought for as a senator, it's what I will do as president, and they want to be part of once again building our economy so it works for everybody, more power to them, because they are the kind of business leaders who understand that if we don't get the American economy moving and growing, we're not going to recognize our country and we're not going to give our kids the same opportunities that we had. So I see as president having a constant dialogue with Americans here's what we're trying to get done, here's why I need your help, here's why you may think comprehensive immigration reform with a path to citizenship isn't something you care about, but I'm telling you it will help fix the labor market, it will bring people out of the shadows   Well, I'm certainly going to unite the party, but I'm not I'm not getting ahead of myself.
+
+- focused on personal image / values
+- big picture vision for the future
+
 ### GE
 Yes, I think that that's a very good question, because I've heard from lots of teachers and parents about some of their concerns about some of the things that are being said and done in this campaign.
 But it is important for us as a policy, you know, not to say, as Donald has said, we're going to ban people based on a religion.
@@ -313,6 +368,11 @@ Independent experts have looked at what I've proposed and looked at what Donald'
 Or maybe he doesn't want the American people, all of you watching tonight, to know that he's paid nothing in federal taxes, because the only years that anybody's ever seen were a couple of years when he had to turn them over to state authorities when he was trying to get a casino license, and they showed he didn't pay any federal income tax.
 But I want toon behalf of myself, and I think on behalf of a majority of the American people, say that, you know, our word is good.
 
+*Small*
+Yes, I think that that's a very good question, because I've heard from lots of teachers and parents about some of their concerns about some of the things that are being said and done in this campaign. But it is important for us as a policy, you know, not to say, as Donald has said, we're going to ban people based on a religion. And I think when you look at the letters that I get, a lot of people are worried that maybe they wouldn't have a place in Donald Trump's America. Independent experts have looked at what I've proposed and looked at what Donald's proposed, and basically they've said this, that if his tax plan, which would blow up the debt by over $5 trillion and would in some instances disadvantage middle-class families compared to the wealthy, were to go into effect, we would lose 3.5 million jobs and maybe have another recession.
+But I want toon behalf of myself, and I think on behalf of a majority of the American people, say that, you know, our word is good.
+
+- focused on drawing distinctions with Donald
 
 **Clustering**
 *CLINTON*
@@ -389,6 +449,8 @@ top features for each cluster:
 - How similar are VP to their leaders? Mirror language?
 - How do these trends compare to past elections?
 - How do these topics compare to other main speeches? Stump speeches? DNC / RNC?
+- How does this compare to changes in past elections?
+
 
 
 
