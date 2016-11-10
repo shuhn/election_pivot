@@ -13,6 +13,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from scipy.spatial.distance import pdist, squareform
 from scipy.cluster.hierarchy import linkage, dendrogram
+from sklearn.decomposition import PCA
 
 def setup_buckets(file_name):
     """
@@ -163,7 +164,7 @@ def lemmitize(text_string):
     lowercased = [t.lower() for t in tokens]
     STOPWORDS = stopwords.words('english')
     #the following words where identified as irrelevant based on context from hierachical clustering (see below)
-    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going', 'say', 'want', 'year', 'inaudible', 'know', 'think', 'later', 'thing', 'york', 'new', 'said', 'people', 'cnn', 'jeb', 'florida', 'able', 'unidentifiable', 'need', 'ted', 'trump', 'ben', 'senator', 'sanders', 'make', 'flint', 'question', 'tell', 'come', 'like', 'wait', 'year']
+    new_stop = ['unidentified', 'male', 'applause', 'laughter', 'well', 'know', 'let', 'crosstalk', 'thanks', 'thank', 'you', 'cross', 'talk', 'booing', 'good', 'lot', 'point', 'going', 'say', 'want', 'year', 'inaudible', 'know', 'think', 'later', 'thing', 'york', 'new', 'said', 'people', 'cnn', 'jeb', 'florida', 'able', 'unidentifiable', 'need', 'ted', 'trump', 'ben', 'senator', 'sanders', 'make', 'flint', 'question', 'tell', 'come', 'like', 'wait', 'year', 'million', 'dollar', 'including', 'pretty', 'saying']
     for word in new_stop:
         STOPWORDS.append(word)
     no_stopwords = [w for w in lowercased if not w in STOPWORDS]
@@ -256,7 +257,7 @@ def k_means(df_dict, df_dict_nolem, keys, n_clusters_, ngram_range):
     X = vectorizer.fit_transform(df[keys[1]])
 
     features = vectorizer.get_feature_names()
-    kmeans = KMeans(n_clusters=n_clusters_, max_iter = 1000, n_init = 100)
+    kmeans = KMeans(init='k-means++', n_clusters=n_clusters_, max_iter = 1000, n_init = 100)
     kmeans.fit(X)
 
     #LOOK INTO CLASS BALANCES

@@ -49,7 +49,8 @@ def parse_names(key_players):
     'Rachel Maddow (MSNBC)' : 'MADDOW:',
     'Jorge Ramos (Univision)' : 'RAMOS:',
     'Maria Elena Salinas (Univision)' : 'SALINAS:',
-    'Karen Tumulty (Washington Post)' : 'TUMULTY:'}
+    'Karen Tumulty (Washington Post)' : 'TUMULTY:',
+    'TOWN HALL QUESTION' : 'QUESTION:'}
 
     participants = {'Former Secretary of State Hillary Clinton' : 'CLINTON:',
     'Former Governor Martin O\'Malley (MD)': 'O\'MALLEY:',
@@ -113,7 +114,8 @@ def file_grab(name = 'All'):
 
     elif name == 'G':
         return {'1st General Election Debate: September 26th, 2016' : 'data/G_9_26_16.txt',
-        '2nd General Election Debate: October 9th, 2016' : 'data/G_10_9_16.txt'}
+        '2nd General Election Debate: October 9th, 2016' : 'data/G_10_9_16.txt',
+        '3rd General Election Debate: October 19th, 2016' : 'data/G_10_19_16.txt'}
 
     elif name == 'R1':
         return {'1st Republican Debate: August 6th, 2015' : 'data/R_8_6_15.txt'}
